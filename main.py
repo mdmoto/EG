@@ -55,7 +55,10 @@ def main():
     from modules.prophet import generate_prediction
     
     # Using the user-provided key
-    API_KEY = "AIzaSyC0040GEPbQ2koWk1zSAB-YANtxufipAU0" 
+    API_KEY = os.getenv("GEMINI_API_KEY")
+    if not API_KEY:
+        print("ERROR: GEMINI_API_KEY not set. Please set environment variable.")
+        return
     
     context_data = {
         'seed': user.entropy_seed,

@@ -212,7 +212,12 @@ def screen_radiant():
                 st.write(get_text("void_compensating", LANG))
                 time.sleep(1)
                 
-                api_key = "AIzaSyC0040GEPbQ2koWk1zSAB-YANtxufipAU0" 
+                try:
+                    api_key = st.secrets["GEMINI_API_KEY"]
+                except:
+                    # Fallback for local dev if not using secrets.toml correctly (though secrets.toml is recommended)
+                    # Or tell user to set it.
+                    api_key = os.getenv("GEMINI_API_KEY")
                 
                 # NOTE: We might want the prompt to request the response language matching LANG.
                 # But current prompt logic in prophet.py is fixed to Chinese mainly.
@@ -246,7 +251,10 @@ def screen_radiant():
         if img_file:
             if st.button(get_text("lens_btn", LANG)):
                 with st.spinner(get_text("lens_processing", LANG)):
-                     api_key = "AIzaSyC0040GEPbQ2koWk1zSAB-YANtxufipAU0"
+                     try:
+                        api_key = st.secrets["GEMINI_API_KEY"]
+                     except:
+                        api_key = os.getenv("GEMINI_API_KEY")
                      # Also assume image analysis needs prompt tweak for language.
                      # For MVP we stick to Chinese default logic or basic prompt injection
                      # analyze_image in features.py needs update to support lang.

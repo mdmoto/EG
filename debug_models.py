@@ -1,7 +1,11 @@
 import google.generativeai as genai
 import os
 
-API_KEY = "AIzaSyC0040GEPbQ2koWk1zSAB-YANtxufipAU0"
+API_KEY = os.getenv("GEMINI_API_KEY")
+if not API_KEY:
+    print("ERROR: GEMINI_API_KEY env var missing")
+    exit(1)
+
 genai.configure(api_key=API_KEY)
 
 print("Listing available models...")
