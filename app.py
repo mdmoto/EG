@@ -190,22 +190,38 @@ def screen_radiant():
     st.markdown(f'<div style="color: var(--chaos-orange);">{get_text("rad_entropy_state", LANG)}: {chaos["entropy_state"]}</div>', unsafe_allow_html=True)
     st.markdown('</div>', unsafe_allow_html=True)
     
-    # MOBILE-OPTIMIZED GRID LAYOUT
+    # EASTERN VECTOR SECTION
+    st.markdown(f'<h3 style="color: var(--order-blue); text-align: center; margin-bottom: 5px;">{get_text("rad_west_title", LANG).replace("Western", "Eastern").replace("西方", "东方")}</h3>', unsafe_allow_html=True)
     st.markdown(f"""
     <div class="metric-grid">
-        <div class="metric-box" style="border-color: var(--order-blue);">
+        <div class="metric-box" style="border-color: var(--order-blue); box-shadow: 0 0 10px rgba(0, 240, 255, 0.2);">
             <div class="metric-label">{get_text('rad_day_master', LANG)}</div>
             <div class="metric-value-east">{eastern['day_master']}</div>
         </div>
-        <div class="metric-box" style="border-color: var(--order-blue);">
+        <div class="metric-box" style="border-color: var(--order-blue); box-shadow: 0 0 10px rgba(0, 240, 255, 0.2);">
             <div class="metric-label">{get_text('rad_animal', LANG)}</div>
             <div class="metric-value-east">{eastern['animal']}</div>
         </div>
-        <div class="metric-box" style="border-color: var(--chaos-orange);">
+    </div>
+    """, unsafe_allow_html=True)
+
+    # CENTRAL LOGO (Visual Key)
+    st.markdown('<div style="text-align: center; margin: 20px 0;">', unsafe_allow_html=True)
+    try:
+        st.image("assets/logo.jpg", width=80) 
+    except:
+        pass
+    st.markdown('</div>', unsafe_allow_html=True)
+
+    # WESTERN VECTOR SECTION
+    st.markdown(f'<h3 style="color: var(--chaos-orange); text-align: center; margin-bottom: 5px;">{get_text("rad_west_title", LANG)}</h3>', unsafe_allow_html=True)
+    st.markdown(f"""
+    <div class="metric-grid">
+        <div class="metric-box" style="border-color: var(--chaos-orange); box-shadow: 0 0 10px rgba(255, 107, 0, 0.2);">
             <div class="metric-label">{get_text('rad_sun', LANG)}</div>
             <div class="metric-value-west">{western['sun']}</div>
         </div>
-        <div class="metric-box" style="border-color: var(--chaos-orange);">
+        <div class="metric-box" style="border-color: var(--chaos-orange); box-shadow: 0 0 10px rgba(255, 107, 0, 0.2);">
             <div class="metric-label">{get_text('rad_moon', LANG)}</div>
             <div class="metric-value-west">{western['moon']}</div>
         </div>
