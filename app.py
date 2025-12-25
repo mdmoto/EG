@@ -16,6 +16,7 @@ from modules.chaos import get_chaos_parameters
 from modules.prophet import generate_prediction
 from modules.features import perform_calibration, analyze_image, synthesize_voice
 from modules.i18n import get_text
+from modules.storage import load_profile, save_profile
 
 # --- PAGE CONFIG ---
 st.set_page_config(
