@@ -57,6 +57,10 @@ if 'audio_data' not in st.session_state:
 lang_option = st.sidebar.selectbox("LANGUAGE / 语言", ["中文", "English"], index=0)
 LANG = "CN" if lang_option == "中文" else "EN"
 
+# --- COOKIE MANAGER (Global) ---
+# Initialize here to persist across re-runs and page changes
+cookie_manager = stx.CookieManager()
+
 # --- SCREEN TRANSLATIONS ---
 
 # --- NAVIGATION FUNCTIONS ---
@@ -108,9 +112,6 @@ def screen_calibration():
     st.markdown(f'<h2>{get_text("cal_title", LANG)}</h2>', unsafe_allow_html=True)
     st.markdown('</div>', unsafe_allow_html=True)
     
-    # --- COOKIE MANAGER SETUP ---
-    cookie_manager = stx.CookieManager()
-    
     # Load Profile from Cookie
     cookie_val = cookie_manager.get("user_profile")
     saved_profile = None
@@ -157,9 +158,10 @@ def screen_calibration():
                     "dob_month": d.month, 
                     "dob_day": d.day
                 }
+                # Fire and forget cookie set
                 cookie_manager.set("user_profile", json.dumps(profile_data), expires_at=datetime.datetime.now() + datetime.timedelta(days=30))
                 
-                time.sleep(1)
+                # Proceed immediately using Session State (Memory)
                 user = UserEntity(name, d.year, d.month, d.day, h, phone)
                 st.session_state.user_data = user
                 go_to_radiant()
