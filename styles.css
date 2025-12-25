@@ -178,6 +178,45 @@ h3 {
     animation: flicker 4s infinite alternate;
 }
 
+/* MATRIX SCROLLING TEXT */
+.matrix-container {
+    height: 150px;
+    overflow: hidden;
+    position: relative;
+    border: 1px solid #00FF00;
+    /* Matrix Green Border */
+    background: rgba(0, 20, 0, 0.8);
+    margin: 20px auto;
+    padding: 10px;
+    width: 90%;
+    box-shadow: 0 0 10px #00FF00;
+}
+
+.matrix-text {
+    color: #00FF00;
+    /* Matrix Green */
+    font-family: 'Share Tech Mono', monospace;
+    font-size: 0.9em;
+    line-height: 1.5;
+    position: absolute;
+    width: 95%;
+    text-align: left;
+    /* Construct animation */
+    animation: matrix-scroll 20s linear infinite;
+    text-shadow: 0 0 5px #00FF00;
+}
+
+@keyframes matrix-scroll {
+    0% {
+        top: 100%;
+    }
+
+    100% {
+        top: -100%;
+        /* Adjust depending on text length, or use translateY */
+    }
+}
+
 /* MOBILE GRID */
 .metric-grid {
     display: grid;

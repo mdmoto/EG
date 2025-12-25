@@ -5,6 +5,7 @@ TRANSLATIONS = {
         "splash_logo_missing": "[图标丢失]",
         "splash_title": "熵 之 神",
         "splash_subtitle": "// 系统唤醒中 //",
+        "splash_intro": "这是一个综合了东方的紫微斗数生辰八字、西方的星座和星盘等等的综合占卜方式，结合全人类的所有数据和知识的AI进行宏观计算，反馈的最客观结果，请记住，当数据足够庞大和详细，占卜和预测未来就是科学。",
         "splash_init_btn": ">>> 初始化系统 <<<",
         "loading_modules": "加载核心模块...",
         
@@ -51,6 +52,7 @@ TRANSLATIONS = {
         "splash_logo_missing": "[LOGO MISSING]",
         "splash_title": "ENTROPY GOD",
         "splash_subtitle": "// SYSTEM AWAKENING //",
+        "splash_intro": "This is a comprehensive divination method integrating Eastern Zi Wei Dou Shu & BaZi, Western Astrology, and Star Charts. AI calculates macro-outcomes using all human data and knowledge to provide the most objective results. Remember, when data is vast and detailed enough, divination and predicting the future IS science.",
         "splash_init_btn": ">>> INITIALIZE SYSTEM <<<",
         "loading_modules": "LOADING CORE MODULES...",
         

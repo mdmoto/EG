@@ -96,6 +96,15 @@ def screen_splash():
     st.markdown(f'<h1 class="glitch-text" style="font-size: 3em; margin-top: 20px;">{get_text("splash_title", LANG)}</h1>', unsafe_allow_html=True)
     st.caption(get_text("splash_subtitle", LANG))
     
+    # MATRIX SCROLLING TEXT
+    st.markdown(f"""
+    <div class="matrix-container">
+        <div class="matrix-text">
+            {get_text("splash_intro", LANG)}
+        </div>
+    </div>
+    """, unsafe_allow_html=True)
+    
     st.markdown('</div>', unsafe_allow_html=True)
     
     if st.button(get_text("splash_init_btn", LANG)):
