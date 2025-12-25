@@ -266,3 +266,185 @@ header {
 [data-testid="stToolbar"] {
     display: none !important;
 }
+
+/* --- CYBERPUNK HUD OVERHAUL --- */
+
+/* 1. STATUS WIDGET (Top Right Floating) */
+.status-widget {
+    position: fixed;
+    top: 20px;
+    right: 20px;
+    width: 220px;
+    padding: 12px;
+    background: rgba(0, 15, 25, 0.85);
+    backdrop-filter: blur(8px);
+    z-index: 9999;
+    font-family: 'Share Tech Mono', monospace;
+    font-size: 0.85em;
+    color: var(--order-blue);
+    /* Chamfered bottom-left corner */
+    clip-path: polygon(100% 0,
+            100% 100%,
+            20px 100%,
+            0 calc(100% - 20px),
+            0 0);
+    border-right: 2px solid var(--order-blue);
+    border-top: 2px solid var(--order-blue);
+    box-shadow: 0 0 15px rgba(0, 240, 255, 0.15);
+}
+
+.status-line {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 6px;
+    line-height: 1.2;
+}
+
+/* Dynamic Waveform Animation */
+.waveform {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    height: 18px;
+    width: 40px;
+}
+
+.wave-bar {
+    width: 3px;
+    background-color: var(--chaos-orange);
+    border-radius: 1px;
+    animation: wave-pulse 1.2s ease-in-out infinite;
+}
+
+.wave-bar:nth-child(1) {
+    animation-delay: 0.0s;
+    height: 30%;
+}
+
+.wave-bar:nth-child(2) {
+    animation-delay: 0.15s;
+    height: 60%;
+}
+
+.wave-bar:nth-child(3) {
+    animation-delay: 0.3s;
+    height: 100%;
+}
+
+.wave-bar:nth-child(4) {
+    animation-delay: 0.15s;
+    height: 50%;
+}
+
+@keyframes wave-pulse {
+
+    0%,
+    100% {
+        transform: scaleY(0.4);
+        opacity: 0.6;
+    }
+
+    50% {
+        transform: scaleY(1.0);
+        opacity: 1;
+        box-shadow: 0 0 5px var(--chaos-orange);
+    }
+}
+
+/* 2. TECH FRAMES (Sci-Fi Panels) */
+.tech-frame {
+    position: relative;
+    background: rgba(0, 10, 20, 0.4);
+    padding: 20px 10px;
+    margin-bottom: 25px;
+    /* Aesthetic Clip Path: Cut corners */
+    clip-path: polygon(15px 0, calc(100% - 15px) 0,
+            100% 15px, 100% calc(100% - 15px),
+            calc(100% - 15px) 100%, 15px 100%,
+            0 calc(100% - 15px), 0 15px);
+    /* We use box-shadow on inner elements because clip-path hides outer shadows */
+}
+
+/* Pseudo-borders via nested or sibling elements is hard in Streamlit markdown.
+   We will rely on internal borders of the content divs or SVG backgrounds if needed.
+   For now, we add a thick colorful border to the inner content to mimic the frame. */
+
+.tech-header {
+    text-align: center;
+    font-size: 1.4em;
+    font-weight: bold;
+    margin-bottom: 15px;
+    text-transform: uppercase;
+    letter-spacing: 2px;
+    text-shadow: 0 0 10px currentColor;
+    /* Glow */
+    border-bottom: 1px solid currentColor;
+    padding-bottom: 5px;
+    display: inline-block;
+    width: 100%;
+}
+
+.tf-cyan {
+    color: var(--order-blue);
+    border-color: var(--order-blue);
+}
+
+.tf-orange {
+    color: var(--chaos-orange);
+    border-color: var(--chaos-orange);
+}
+
+/* 3. CRYSTAL ORB (Void Container) */
+.crystal-orb-container {
+    position: relative;
+    width: 280px;
+    height: 280px;
+    margin: 40px auto;
+    border-radius: 50%;
+    /* Complex Gradient for Glass Orb effect */
+    background: radial-gradient(circle at 50% 30%,
+            rgba(200, 250, 255, 0.1) 0%,
+            rgba(0, 240, 255, 0.05) 40%,
+            rgba(0, 0, 0, 0.8) 80%);
+    box-shadow:
+        0 0 30px rgba(0, 240, 255, 0.2),
+        inset 0 0 50px rgba(0, 240, 255, 0.1);
+    border: 1px solid rgba(0, 240, 255, 0.3);
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    padding: 20px;
+    backdrop-filter: blur(3px);
+}
+
+.orb-ring {
+    position: absolute;
+    top: -10px;
+    left: -10px;
+    right: -10px;
+    bottom: -10px;
+    border-radius: 50%;
+    border: 1px dashed rgba(0, 240, 255, 0.3);
+    animation: spin-slow 20s linear infinite;
+    pointer-events: none;
+}
+
+@keyframes spin-slow {
+    0% {
+        transform: rotate(0deg);
+    }
+
+    100% {
+        transform: rotate(360deg);
+    }
+}
+
+/* Base styling fix for inner inputs to be transparent */
+.stTextInput input {
+    background: rgba(0, 0, 0, 0.5) !important;
+    border: 1px solid var(--order-blue) !important;
+    color: #fff !important;
+    text-align: center;
+}

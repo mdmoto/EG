@@ -184,23 +184,42 @@ def screen_radiant():
     western = get_western_coordinates(user, lang=LANG)
     chaos = get_chaos_parameters(user.entropy_seed)
     
-    # Header
-    st.markdown('<div class="glass-panel" style="display: flex; justify-content: space-between; align-items: center;">', unsafe_allow_html=True)
-    st.markdown(f'<div style="color: var(--order-blue);">{get_text("rad_connected", LANG)}: {user.name}</div>', unsafe_allow_html=True)
-    st.markdown(f'<div style="color: var(--chaos-orange);">{get_text("rad_entropy_state", LANG)}: {chaos["entropy_state"]}</div>', unsafe_allow_html=True)
-    st.markdown('</div>', unsafe_allow_html=True)
-    
-    # EASTERN VECTOR SECTION
-    st.markdown(f'<h3 style="color: var(--order-blue); text-align: center; margin-bottom: 5px;">{get_text("rad_west_title", LANG).replace("Western", "Eastern").replace("西方", "东方")}</h3>', unsafe_allow_html=True)
+    # 1. STATUS WIDGET (Top Right Floating)
     st.markdown(f"""
-    <div class="metric-grid">
-        <div class="metric-box" style="border-color: var(--order-blue); box-shadow: 0 0 10px rgba(0, 240, 255, 0.2);">
-            <div class="metric-label">{get_text('rad_day_master', LANG)}</div>
-            <div class="metric-value-east">{eastern['day_master']}</div>
+    <div class="status-widget">
+        <div class="status-line">
+            <span>{get_text("rad_connected", LANG)}:</span>
+            <span style="color: #fff;">{user.name}</span>
         </div>
-        <div class="metric-box" style="border-color: var(--order-blue); box-shadow: 0 0 10px rgba(0, 240, 255, 0.2);">
-            <div class="metric-label">{get_text('rad_animal', LANG)}</div>
-            <div class="metric-value-east">{eastern['animal']}</div>
+        <div class="status-line">
+            <span>{get_text("rad_entropy_state", LANG)}:</span>
+            <span style="color: var(--chaos-orange);">{chaos["entropy_state"]}</span>
+        </div>
+        <!-- Dynamic Waveform -->
+        <div class="waveform">
+            <div class="wave-bar"></div>
+            <div class="wave-bar"></div>
+            <div class="wave-bar"></div>
+            <div class="wave-bar"></div>
+        </div>
+    </div>
+    """, unsafe_allow_html=True)
+    
+    st.markdown("<br><br>", unsafe_allow_html=True) # Spacer for fixed widget
+    
+    # 2. EASTERN VECTOR (Tech Frame Cyan)
+    st.markdown(f"""
+    <div class="tech-frame tf-cyan">
+        <div class="tech-header tf-cyan">{get_text("rad_west_title", LANG).replace("Western", "Eastern").replace("西方", "东方")}</div>
+        <div class="metric-grid">
+            <div class="metric-box" style="border: 1px solid var(--order-blue); box-shadow: inset 0 0 15px rgba(0, 240, 255, 0.2);">
+                <div class="metric-label">{get_text('rad_day_master', LANG)}</div>
+                <div class="metric-value-east">{eastern['day_master']}</div>
+            </div>
+            <div class="metric-box" style="border: 1px solid var(--order-blue); box-shadow: inset 0 0 15px rgba(0, 240, 255, 0.2);">
+                <div class="metric-label">{get_text('rad_animal', LANG)}</div>
+                <div class="metric-value-east">{eastern['animal']}</div>
+            </div>
         </div>
     </div>
     """, unsafe_allow_html=True)
@@ -213,17 +232,19 @@ def screen_radiant():
         pass
     st.markdown('</div>', unsafe_allow_html=True)
 
-    # WESTERN VECTOR SECTION
-    st.markdown(f'<h3 style="color: var(--chaos-orange); text-align: center; margin-bottom: 5px;">{get_text("rad_west_title", LANG)}</h3>', unsafe_allow_html=True)
+    # 3. WESTERN VECTOR (Tech Frame Orange)
     st.markdown(f"""
-    <div class="metric-grid">
-        <div class="metric-box" style="border-color: var(--chaos-orange); box-shadow: 0 0 10px rgba(255, 107, 0, 0.2);">
-            <div class="metric-label">{get_text('rad_sun', LANG)}</div>
-            <div class="metric-value-west">{western['sun']}</div>
-        </div>
-        <div class="metric-box" style="border-color: var(--chaos-orange); box-shadow: 0 0 10px rgba(255, 107, 0, 0.2);">
-            <div class="metric-label">{get_text('rad_moon', LANG)}</div>
-            <div class="metric-value-west">{western['moon']}</div>
+    <div class="tech-frame tf-orange">
+        <div class="tech-header tf-orange">{get_text("rad_west_title", LANG)}</div>
+        <div class="metric-grid">
+            <div class="metric-box" style="border: 1px solid var(--chaos-orange); box-shadow: inset 0 0 15px rgba(255, 107, 0, 0.2);">
+                <div class="metric-label">{get_text('rad_sun', LANG)}</div>
+                <div class="metric-value-west">{western['sun']}</div>
+            </div>
+            <div class="metric-box" style="border: 1px solid var(--chaos-orange); box-shadow: inset 0 0 15px rgba(255, 107, 0, 0.2);">
+                <div class="metric-label">{get_text('rad_moon', LANG)}</div>
+                <div class="metric-value-west">{western['moon']}</div>
+            </div>
         </div>
     </div>
     """, unsafe_allow_html=True)
@@ -236,7 +257,10 @@ def screen_radiant():
     tab_void, tab_lens = st.tabs([get_text("rad_tab_void", LANG), get_text("rad_tab_lens", LANG)])
     
     with tab_void:
+        # 4. CRYSTAL ORB CONTAINER
+        st.markdown('<div class="crystal-orb-container"><div class="orb-ring"></div>', unsafe_allow_html=True)
         query = st.text_input(get_text("void_input_label", LANG), placeholder=get_text("void_input_placeholder", LANG))
+        st.markdown('</div>', unsafe_allow_html=True)
 
         st.markdown('<div class="chaos-btn">', unsafe_allow_html=True)
         if st.button(get_text("void_btn", LANG)):
