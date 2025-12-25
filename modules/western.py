@@ -40,9 +40,9 @@ def get_western_coordinates(user: 'UserEntity'):
         }
     except Exception as e:
         print(f"Western Chart Error: {e}")
-        # Fallback for when pyswisseph fails on cloud (missing ephemeris)
+        # Debugging: Show the error in the UI
         return {
-            'sun': 'Unknown',
+            'sun': f"ERR: {str(e)}",
             'moon': 'Unknown', 
             'ascendant': 'Unknown'
         }
