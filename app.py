@@ -133,6 +133,14 @@ def screen_calibration():
             def_date = datetime.date(saved_profile["dob_year"], saved_profile["dob_month"], saved_profile["dob_day"])
         except:
             def_date = None
+        if saved_profile:
+            user = UserEntity(saved_profile["name"], saved_profile["dob_year"], saved_profile["dob_month"], saved_profile["dob_day"], 12, saved_profile["phone"])
+            st.session_state.user_data = user
+            
+            # Pre-calculate data
+            with st.spinner(get_text("loading_data", LANG)):
+                eastern = get_eastern_coordinates(user)
+                western = get_western_coordinates(user, lang=LANG)
 
     with st.expander(get_text("cal_meta_label", LANG), expanded=True):
         col1, col2 = st.columns(2)
@@ -172,7 +180,7 @@ def screen_radiant():
     user = st.session_state.user_data
     
     eastern = get_eastern_coordinates(user)
-    western = get_western_coordinates(user)
+    western = get_western_coordinates(user, lang=LANG)
     chaos = get_chaos_parameters(user.entropy_seed)
     
     # Header

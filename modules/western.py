@@ -24,12 +24,19 @@ ZODIAC_SIGNS = [
     "Libra", "Scorpio", "Sagittarius", "Capricorn", "Aquarius", "Pisces"
 ]
 
-def get_sign_name(lon):
-    """Converts longitude (0-360) to Zodiac Sign name."""
-    index = int(lon / 30)
-    return ZODIAC_SIGNS[index % 12]
+ZODIAC_CN = [
+    "白羊座", "金牛座", "双子座", "巨蟹座", "狮子座", "处女座", 
+    "天秤座", "天蝎座", "射手座", "摩羯座", "水瓶座", "双鱼座"
+]
 
-def get_western_coordinates(user: 'UserEntity'):
+def get_sign_name(lon, lang='CN'):
+    """Converts longitude (0-360) to Zodiac Sign name."""
+    index = int(lon / 30) % 12
+    if lang == 'CN' or lang == 'zh-CN':
+        return ZODIAC_CN[index]
+    return ZODIAC_SIGNS[index]
+
+def get_western_coordinates(user: 'UserEntity', lang='CN'):
     """
     Calculates Sun, Moon, and Ascendant signs using DIRECT swisseph.
     Bypasses flatlib to avoid 'tuple index out of range' errors on Cloud.
@@ -77,9 +84,9 @@ def get_western_coordinates(user: 'UserEntity'):
         asc_lon = ascmc[0]
 
         return {
-            'sun': get_sign_name(sun_lon),
-            'moon': get_sign_name(moon_lon),
-            'ascendant': get_sign_name(asc_lon)
+            'sun': get_sign_name(sun_lon, lang),
+            'moon': get_sign_name(moon_lon, lang),
+            'ascendant': get_sign_name(asc_lon, lang)
         }
         
     except Exception as e:
