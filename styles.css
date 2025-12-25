@@ -183,16 +183,14 @@ h3 {
     width: 100%;
     overflow: hidden;
     position: relative;
-    border: 1px solid var(--order-blue);
-    /* Cyan Border per user request */
-    background: rgba(0, 5, 0, 0.6);
+    border: none;
+    background: transparent;
     margin-bottom: 20px;
-    padding: 15px 0;
+    padding: 10px 0;
     height: 70px;
-    /* Fixed height for large text */
     display: flex;
     align-items: center;
-    box-shadow: 0 0 10px rgba(0, 240, 255, 0.2);
+    box-shadow: none;
 }
 
 .matrix-text {
