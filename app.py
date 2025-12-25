@@ -88,6 +88,15 @@ def reset_app():
 def screen_splash():
     st.markdown('<div class="glass-panel" style="text-align: center; margin-top: 5vh; padding: 40px 20px;">', unsafe_allow_html=True)
     
+    # MATRIX SCROLLING TEXT (Moved to top)
+    st.markdown(f"""
+    <div class="matrix-container">
+        <div class="matrix-text">
+            {get_text("splash_intro", LANG)}
+        </div>
+    </div>
+    """, unsafe_allow_html=True)
+    
     try:
         st.image("assets/logo.jpg", width=150)
     except:
@@ -96,14 +105,7 @@ def screen_splash():
     st.markdown(f'<h1 class="glitch-text" style="font-size: 3em; margin-top: 20px;">{get_text("splash_title", LANG)}</h1>', unsafe_allow_html=True)
     st.caption(get_text("splash_subtitle", LANG))
     
-    # MATRIX SCROLLING TEXT
-    st.markdown(f"""
-    <div class="matrix-container">
-        <div class="matrix-text">
-            {get_text("splash_intro", LANG)}
-        </div>
-    </div>
-    """, unsafe_allow_html=True)
+    # Removed old matrix text position
     
     st.markdown('</div>', unsafe_allow_html=True)
     
