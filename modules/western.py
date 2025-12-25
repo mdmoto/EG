@@ -9,6 +9,12 @@ swe_path = os.path.join(project_root, 'swefiles')
 
 if os.path.exists(swe_path):
     os.environ["SE_EPHE_PATH"] = swe_path
+    # FORCE setting the path using the low-level library
+    try:
+        import swisseph as swe
+        swe.set_ephe_path(swe_path)
+    except:
+        pass
 # -------------------------------------
 
 from flatlib.datetime import Datetime

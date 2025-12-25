@@ -16,7 +16,9 @@ from modules.chaos import get_chaos_parameters
 from modules.prophet import generate_prediction
 from modules.features import perform_calibration, analyze_image, synthesize_voice
 from modules.i18n import get_text
-from modules.storage import load_profile, save_profile
+# from modules.storage import load_profile, save_profile # DEPRECATED: Filesystem storage is not multi-user safe
+import extra_streamlit_components as stx
+import json
 
 # --- PAGE CONFIG ---
 st.set_page_config(
@@ -106,8 +108,17 @@ def screen_calibration():
     st.markdown(f'<h2>{get_text("cal_title", LANG)}</h2>', unsafe_allow_html=True)
     st.markdown('</div>', unsafe_allow_html=True)
     
-    # Load Profile
-    saved_profile = load_profile()
+    # --- COOKIE MANAGER SETUP ---
+    cookie_manager = stx.CookieManager()
+    
+    # Load Profile from Cookie
+    cookie_val = cookie_manager.get("user_profile")
+    saved_profile = None
+    if cookie_val:
+        try:
+           saved_profile = json.loads(cookie_val)
+        except:
+           pass
     
     # Defaults
     def_name = "Neo"
@@ -138,8 +149,15 @@ def screen_calibration():
             st.error(get_text("cal_error_missing", LANG))
         else:
             with st.spinner(get_text("cal_syncing", LANG)):
-                # Save Profile
-                save_profile(name, phone, d.year, d.month, d.day)
+                # Save Profile to Cookie (Expires in 30 days)
+                profile_data = {
+                    "name": name,
+                    "phone": phone, 
+                    "dob_year": d.year, 
+                    "dob_month": d.month, 
+                    "dob_day": d.day
+                }
+                cookie_manager.set("user_profile", json.dumps(profile_data), expires_at=datetime.datetime.now() + datetime.timedelta(days=30))
                 
                 time.sleep(1)
                 user = UserEntity(name, d.year, d.month, d.day, h, phone)

@@ -7,3 +7,4 @@ Pillow
 pyswisseph
 flatlib
 lunar_python
+extra-streamlit-components
