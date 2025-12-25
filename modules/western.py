@@ -7,20 +7,29 @@ def get_western_coordinates(user: 'UserEntity'):
     """
     Calculates Sun, Moon, and Ascendant signs.
     """
-    date = Datetime(
-        f"{user.birth_year}/{user.birth_month:02d}/{user.birth_day:02d}", 
-        f"{user.birth_hour:02d}:00", 
-        '+08:00'
-    )
-    pos = GeoPos(user.lat, user.lon)
-    chart = Chart(date, pos)
+    try:
+        date = Datetime(
+            f"{user.birth_year}/{user.birth_month:02d}/{user.birth_day:02d}", 
+            f"{user.birth_hour:02d}:00", 
+            '+08:00'
+        )
+        pos = GeoPos(user.lat, user.lon)
+        chart = Chart(date, pos)
 
-    sun = chart.get(const.SUN)
-    moon = chart.get(const.MOON)
-    asc = chart.get(const.ASC)
+        sun = chart.get(const.SUN)
+        moon = chart.get(const.MOON)
+        asc = chart.get(const.ASC)
 
-    return {
-        'sun': sun.sign,
-        'moon': moon.sign,
-        'ascendant': asc.sign
-    }
+        return {
+            'sun': sun.sign,
+            'moon': moon.sign,
+            'ascendant': asc.sign
+        }
+    except Exception as e:
+        print(f"Western Chart Error: {e}")
+        # Fallback for when pyswisseph fails on cloud (missing ephemeris)
+        return {
+            'sun': 'Unknown',
+            'moon': 'Unknown', 
+            'ascendant': 'Unknown'
+        }
