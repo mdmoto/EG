@@ -14,7 +14,7 @@ from modules.eastern import get_eastern_coordinates
 from modules.western import get_western_coordinates
 from modules.chaos import get_chaos_parameters
 from modules.prophet import generate_prediction
-from modules.features import perform_calibration, analyze_image, synthesize_voice, identify_divination_type, perform_specific_divination
+from modules.features import perform_calibration, synthesize_voice, identify_divination_type, perform_specific_divination
 from modules.i18n import get_text
 # from modules.storage import load_profile, save_profile # DEPRECATED: Filesystem storage is not multi-user safe
 import extra_streamlit_components as stx
