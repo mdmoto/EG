@@ -172,15 +172,45 @@ h3 {
     animation: flicker 4s infinite alternate;
 }
 
-/* HIDE STREAMLIT UI */
+/* MOBILE GRID */
+.metric-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 10px;
+    width: 100%;
+}
+
+@media (max-width: 600px) {
+    .glass-panel {
+        padding: 10px;
+    }
+
+    .metric-box {
+        padding: 10px;
+    }
+
+    .metric-value-east,
+    .metric-value-west {
+        font-size: 0.9em;
+    }
+}
+
+/* HIDE STREAMLIT UI COMPLETELY */
 #MainMenu {
     visibility: hidden;
+    display: none !important;
 }
 
 footer {
     visibility: hidden;
+    display: none !important;
 }
 
 header {
     visibility: hidden;
+    display: none !important;
+}
+
+[data-testid="stToolbar"] {
+    display: none !important;
 }

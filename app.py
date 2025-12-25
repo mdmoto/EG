@@ -14,7 +14,7 @@ from modules.eastern import get_eastern_coordinates
 from modules.western import get_western_coordinates
 from modules.chaos import get_chaos_parameters
 from modules.prophet import generate_prediction
-from modules.features import perform_calibration, analyze_image, synthesize_voice
+from modules.features import perform_calibration, analyze_image, synthesize_voice, identify_divination_type, perform_specific_divination
 from modules.i18n import get_text
 # from modules.storage import load_profile, save_profile # DEPRECATED: Filesystem storage is not multi-user safe
 import extra_streamlit_components as stx
@@ -189,11 +189,9 @@ def screen_radiant():
     st.markdown(f'<div style="color: var(--chaos-orange);">{get_text("rad_entropy_state", LANG)}: {chaos["entropy_state"]}</div>', unsafe_allow_html=True)
     st.markdown('</div>', unsafe_allow_html=True)
     
-    col_l, col_c, col_r = st.columns([1, 2, 1])
-    
-    with col_l:
-        st.markdown(f"### {get_text('rad_east_title', LANG)}")
-        st.markdown(f"""
+    # MOBILE-OPTIMIZED GRID LAYOUT
+    st.markdown(f"""
+    <div class="metric-grid">
         <div class="metric-box" style="border-color: var(--order-blue);">
             <div class="metric-label">{get_text('rad_day_master', LANG)}</div>
             <div class="metric-value-east">{eastern['day_master']}</div>
@@ -202,17 +200,6 @@ def screen_radiant():
             <div class="metric-label">{get_text('rad_animal', LANG)}</div>
             <div class="metric-value-east">{eastern['animal']}</div>
         </div>
-        """, unsafe_allow_html=True)
-        
-    with col_c:
-        try:
-            st.image("assets/logo.jpg", use_container_width=True)
-        except:
-            st.write("EYE")
-    
-    with col_r:
-        st.markdown(f"### {get_text('rad_west_title', LANG)}")
-        st.markdown(f"""
         <div class="metric-box" style="border-color: var(--chaos-orange);">
             <div class="metric-label">{get_text('rad_sun', LANG)}</div>
             <div class="metric-value-west">{western['sun']}</div>
@@ -221,7 +208,10 @@ def screen_radiant():
             <div class="metric-label">{get_text('rad_moon', LANG)}</div>
             <div class="metric-value-west">{western['moon']}</div>
         </div>
-        """, unsafe_allow_html=True)
+    </div>
+    """, unsafe_allow_html=True)
+    
+    st.markdown("<br>", unsafe_allow_html=True)
         
     st.markdown("<br><br>", unsafe_allow_html=True)
     
@@ -275,24 +265,38 @@ def screen_radiant():
         
     with tab_lens:
         st.info(get_text("lens_info", LANG))
+        # CAMERA INPUT IS PRIMARY
         img_file = st.camera_input(get_text("lens_cam_label", LANG))
         
         if img_file:
+            st.markdown('<div class="chaos-btn">', unsafe_allow_html=True)
             if st.button(get_text("lens_btn", LANG)):
-                with st.spinner(get_text("lens_processing", LANG)):
+                with st.status(get_text("lens_processing", LANG), expanded=True) as status:
                      try:
                         api_key = st.secrets["GEMINI_API_KEY"]
                      except:
                         api_key = os.getenv("GEMINI_API_KEY")
-                     # Also assume image analysis needs prompt tweak for language.
-                     # For MVP we stick to Chinese default logic or basic prompt injection
-                     # analyze_image in features.py needs update to support lang.
-                     # For now, let's just run it. 
-                     result = analyze_image(api_key, img_file)
+
+                     # STEP 1: IDENTIFY
+                     # Reset buffer just in case
+                     img_file.seek(0)
+                     method, obj_name = identify_divination_type(api_key, img_file)
+                     
+                     st.write(f"👁️ ANALYSIS: **{obj_name}**")
+                     st.write(f"🔮 PROTOCOL: **{method}**")
+                     time.sleep(1)
+                     
+                     # STEP 2: DIVINATION
+                     img_file.seek(0) # Reset buffer for second read
+                     result = perform_specific_divination(api_key, img_file, method, lang=LANG)
+                     
+                     status.update(label=get_text("void_complete", LANG), state="complete", expanded=False)
                      
                      audio_bytes = synthesize_voice(result, lang='en' if LANG == 'EN' else 'zh-CN')
                      
                      go_to_revelation(result, audio_bytes)
+                     
+            st.markdown('</div>', unsafe_allow_html=True)
 
 
 def screen_revelation():
