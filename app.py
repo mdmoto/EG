@@ -86,7 +86,7 @@ def reset_app():
     st.rerun()
 
 def screen_splash():
-    st.markdown('<div class="glass-panel" style="text-align: center; margin-top: 5vh; padding: 10px 10px 40px 10px;">', unsafe_allow_html=True)
+    st.markdown('<div class="glass-panel" style="text-align: center; margin-top: 5vh; padding: 110px 20px 40px 20px;">', unsafe_allow_html=True)
     
     # MATRIX SCROLLING TEXT (Moved to top)
     st.markdown(f"""

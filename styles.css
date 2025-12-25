@@ -178,19 +178,23 @@ h3 {
     animation: flicker 4s infinite alternate;
 }
 
-/* MATRIX SCROLLING TEXT (HORIZONTAL) */
+/* MATRIX SCROLLING TEXT (HEADER STYLE) */
 .matrix-container {
+    position: absolute;
+    /* Fix to top of glass-panel */
+    top: 0;
+    left: 0;
     width: 100%;
+    height: 90px;
+    /* Header Height */
     overflow: hidden;
-    position: relative;
-    border: none;
-    background: transparent;
-    margin: 0;
-    padding: 0;
-    height: 85px;
+    border-bottom: 1px solid var(--order-blue);
+    /* Separator Line */
+    background: rgba(0, 0, 0, 0.8);
+    /* Darker header bg */
     display: flex;
     align-items: center;
-    box-shadow: none;
+    z-index: 10;
 }
 
 .matrix-text {
