@@ -25,6 +25,12 @@ body,
     overflow-x: hidden;
 }
 
+/* REDUCE TOP PADDING FOR MOBILE */
+.block-container {
+    padding-top: 1rem !important;
+    padding-bottom: 5rem !important;
+}
+
 h1,
 h2,
 h3 {
