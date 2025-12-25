@@ -1,3 +1,16 @@
+import os
+
+# --- CONFIGURE ASTROLOGY DATA PATH ---
+# Must be set BEFORE importing flatlib/pyswisseph objects that might init defaults
+# We look for 'swefiles' in the project root
+current_dir = os.path.dirname(os.path.abspath(__file__))
+project_root = os.path.dirname(current_dir) # Go up one level from 'modules'
+swe_path = os.path.join(project_root, 'swefiles')
+
+if os.path.exists(swe_path):
+    os.environ["SE_EPHE_PATH"] = swe_path
+# -------------------------------------
+
 from flatlib.datetime import Datetime
 from flatlib.geopos import GeoPos
 from flatlib.chart import Chart
