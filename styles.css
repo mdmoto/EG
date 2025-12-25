@@ -267,46 +267,40 @@ header {
     display: none !important;
 }
 
-/* --- CYBERPUNK HUD OVERHAUL --- */
+/* --- CYBERPUNK HUD OVERHAUL (V2 Refined) --- */
 
-/* 1. STATUS WIDGET (Top Right Floating) */
+/* 1. STATUS WIDGET (Top Right - Non-overlapping) */
 .status-widget {
-    position: fixed;
-    top: 20px;
-    right: 20px;
-    width: 220px;
-    padding: 12px;
-    background: rgba(0, 15, 25, 0.85);
-    backdrop-filter: blur(8px);
-    z-index: 9999;
+    /* Changed from fixed to absolute to scroll with page and avoid perm-overlap on small screens */
+    position: absolute;
+    top: 5px;
+    right: 5px;
+    width: 200px;
+    padding: 10px;
+    background: rgba(0, 10, 20, 0.9);
+    border: 1px solid var(--order-blue);
+    z-index: 100;
     font-family: 'Share Tech Mono', monospace;
-    font-size: 0.85em;
+    font-size: 0.8em;
     color: var(--order-blue);
-    /* Chamfered bottom-left corner */
-    clip-path: polygon(100% 0,
-            100% 100%,
-            20px 100%,
-            0 calc(100% - 20px),
-            0 0);
-    border-right: 2px solid var(--order-blue);
-    border-top: 2px solid var(--order-blue);
-    box-shadow: 0 0 15px rgba(0, 240, 255, 0.15);
+    border-radius: 0 0 0 15px;
+    /* Cut corner */
+    box-shadow: 0 0 10px rgba(0, 240, 255, 0.1);
 }
 
 .status-line {
     display: flex;
     justify-content: space-between;
     align-items: center;
-    margin-bottom: 6px;
-    line-height: 1.2;
+    margin-bottom: 5px;
 }
 
-/* Dynamic Waveform Animation */
+/* Dynamic Waveform (Kept same) */
 .waveform {
     display: flex;
     align-items: center;
     justify-content: space-between;
-    height: 18px;
+    height: 15px;
     width: 40px;
 }
 
@@ -314,7 +308,7 @@ header {
     width: 3px;
     background-color: var(--chaos-orange);
     border-radius: 1px;
-    animation: wave-pulse 1.2s ease-in-out infinite;
+    animation: wave-pulse 1s ease-in-out infinite;
 }
 
 .wave-bar:nth-child(1) {
@@ -337,98 +331,124 @@ header {
     height: 50%;
 }
 
-@keyframes wave-pulse {
-
-    0%,
-    100% {
-        transform: scaleY(0.4);
-        opacity: 0.6;
-    }
-
-    50% {
-        transform: scaleY(1.0);
-        opacity: 1;
-        box-shadow: 0 0 5px var(--chaos-orange);
-    }
-}
-
-/* 2. TECH FRAMES (Sci-Fi Panels) */
+/* 2. TECH FRAMES (Corner Brackets Style) */
 .tech-frame {
     position: relative;
-    background: rgba(0, 10, 20, 0.4);
-    padding: 20px 10px;
-    margin-bottom: 25px;
-    /* Aesthetic Clip Path: Cut corners */
-    clip-path: polygon(15px 0, calc(100% - 15px) 0,
-            100% 15px, 100% calc(100% - 15px),
-            calc(100% - 15px) 100%, 15px 100%,
-            0 calc(100% - 15px), 0 15px);
-    /* We use box-shadow on inner elements because clip-path hides outer shadows */
+    padding: 25px 15px;
+    margin-bottom: 30px;
+    margin-top: 10px;
+    background: rgba(0, 5, 10, 0.3);
+    /* Subtle background */
 }
 
-/* Pseudo-borders via nested or sibling elements is hard in Streamlit markdown.
-   We will rely on internal borders of the content divs or SVG backgrounds if needed.
-   For now, we add a thick colorful border to the inner content to mimic the frame. */
-
-.tech-header {
-    text-align: center;
-    font-size: 1.4em;
-    font-weight: bold;
-    margin-bottom: 15px;
-    text-transform: uppercase;
-    letter-spacing: 2px;
-    text-shadow: 0 0 10px currentColor;
-    /* Glow */
-    border-bottom: 1px solid currentColor;
-    padding-bottom: 5px;
-    display: inline-block;
-    width: 100%;
-}
-
+/* Corner Bracket Logic via Gradients (No images needed) */
 .tf-cyan {
-    color: var(--order-blue);
-    border-color: var(--order-blue);
+    /* Top-Left & Top-Right & Bottom-Left & Bottom-Right Corners */
+    background-image:
+        linear-gradient(var(--order-blue), var(--order-blue)),
+        linear-gradient(var(--order-blue), var(--order-blue)),
+        linear-gradient(var(--order-blue), var(--order-blue)),
+        linear-gradient(var(--order-blue), var(--order-blue));
+    background-repeat: no-repeat;
+    background-size: 2px 20px, 20px 2px;
+    /* Thickness Length */
+    background-position:
+        0 0, 0 0,
+        /* Top-Left Vertical, Top-Left Horizontal */
+        100% 0, 100% 0,
+        /* Top-Right */
+        0 100%, 0 100%,
+        /* Bottom-Left */
+        100% 100%, 100% 100%;
+    /* Bottom-Right */
+    /* Wait, css gradient syntax for multiple corners is tricky. 
+       Let's use a cleaner approach with pseudo-elements for the main "Bracket" look 
+    */
+    background:
+        linear-gradient(to right, var(--order-blue) 2px, transparent 2px) 0 0,
+        linear-gradient(to bottom, var(--order-blue) 2px, transparent 2px) 0 0,
+        linear-gradient(to left, var(--order-blue) 2px, transparent 2px) 100% 0,
+        linear-gradient(to bottom, var(--order-blue) 2px, transparent 2px) 100% 0,
+        linear-gradient(to right, var(--order-blue) 2px, transparent 2px) 0 100%,
+        linear-gradient(to top, var(--order-blue) 2px, transparent 2px) 0 100%,
+        linear-gradient(to left, var(--order-blue) 2px, transparent 2px) 100% 100%,
+        linear-gradient(to top, var(--order-blue) 2px, transparent 2px) 100% 100%;
+    background-repeat: no-repeat;
+    background-size: 20px 20px;
+    box-shadow: inset 0 0 20px rgba(0, 240, 255, 0.05);
+    /* Inner Glow */
 }
 
 .tf-orange {
-    color: var(--chaos-orange);
-    border-color: var(--chaos-orange);
+    background:
+        linear-gradient(to right, var(--chaos-orange) 2px, transparent 2px) 0 0,
+        linear-gradient(to bottom, var(--chaos-orange) 2px, transparent 2px) 0 0,
+        linear-gradient(to left, var(--chaos-orange) 2px, transparent 2px) 100% 0,
+        linear-gradient(to bottom, var(--chaos-orange) 2px, transparent 2px) 100% 0,
+        linear-gradient(to right, var(--chaos-orange) 2px, transparent 2px) 0 100%,
+        linear-gradient(to top, var(--chaos-orange) 2px, transparent 2px) 0 100%,
+        linear-gradient(to left, var(--chaos-orange) 2px, transparent 2px) 100% 100%,
+        linear-gradient(to top, var(--chaos-orange) 2px, transparent 2px) 100% 100%;
+    background-repeat: no-repeat;
+    background-size: 20px 20px;
+    box-shadow: inset 0 0 20px rgba(255, 107, 0, 0.05);
 }
 
-/* 3. CRYSTAL ORB (Void Container) */
+.tech-header {
+    text-align: center;
+    font-size: 1.2em;
+    font-weight: bold;
+    letter-spacing: 3px;
+    transform: translateY(-35px);
+    /* Pull header UP to sit on top border */
+    background: #000;
+    /* Mask line behind text */
+    padding: 0 10px;
+    display: inline-block;
+    margin: 0 auto;
+    width: auto;
+    /* Shrink to fit text */
+    border: none;
+    text-shadow: 0 0 10px currentColor;
+}
+
+.tf-cyan .tech-header {
+    color: var(--order-blue);
+}
+
+.tf-orange .tech-header {
+    color: var(--chaos-orange);
+}
+
+/* 3. CRYSTAL ORB (Brighter & Stronger) */
 .crystal-orb-container {
     position: relative;
-    width: 280px;
-    height: 280px;
-    margin: 40px auto;
+    width: 260px;
+    height: 260px;
+    margin: 20px auto;
     border-radius: 50%;
-    /* Complex Gradient for Glass Orb effect */
-    background: radial-gradient(circle at 50% 30%,
-            rgba(200, 250, 255, 0.1) 0%,
-            rgba(0, 240, 255, 0.05) 40%,
-            rgba(0, 0, 0, 0.8) 80%);
-    box-shadow:
-        0 0 30px rgba(0, 240, 255, 0.2),
-        inset 0 0 50px rgba(0, 240, 255, 0.1);
-    border: 1px solid rgba(0, 240, 255, 0.3);
+    background: radial-gradient(circle at center,
+            rgba(0, 240, 255, 0.15) 0%,
+            rgba(0, 0, 0, 0.4) 60%,
+            rgba(0, 240, 255, 0.2) 100%);
+    box-shadow: 0 0 40px rgba(0, 240, 255, 0.2), inset 0 0 20px rgba(0, 240, 255, 0.2);
+    border: 1px solid rgba(0, 240, 255, 0.4);
     display: flex;
     flex-direction: column;
     justify-content: center;
     align-items: center;
     padding: 20px;
-    backdrop-filter: blur(3px);
 }
 
 .orb-ring {
     position: absolute;
-    top: -10px;
-    left: -10px;
-    right: -10px;
-    bottom: -10px;
+    top: -5px;
+    left: -5px;
+    right: -5px;
+    bottom: -5px;
     border-radius: 50%;
-    border: 1px dashed rgba(0, 240, 255, 0.3);
-    animation: spin-slow 20s linear infinite;
-    pointer-events: none;
+    border: 2px dashed rgba(0, 240, 255, 0.4);
+    animation: spin-slow 30s linear infinite;
 }
 
 @keyframes spin-slow {
