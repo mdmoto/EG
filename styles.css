@@ -180,18 +180,22 @@ h3 {
 
 /* MATRIX SCROLLING TEXT (HORIZONTAL) */
 .matrix-container {
-    width: 100%;
+    width: 95%;
+    /* Fitted width */
     overflow: hidden;
     position: relative;
-    border: none;
-    background: transparent;
-    margin-bottom: 20px;
+    border: 1px solid var(--order-blue);
+    /* RESTORE SCREEN BORDER */
+    background: rgba(0, 0, 0, 0.9);
+    /* RESTORE SCREEN BG */
+    margin: 0 auto 20px auto;
+    /* Center it */
     padding: 0;
     height: 85px;
-    /* Increased height */
     display: flex;
     align-items: center;
-    box-shadow: none;
+    box-shadow: inset 0 0 10px rgba(0, 240, 255, 0.1);
+    border-radius: 4px;
 }
 
 .matrix-text {
