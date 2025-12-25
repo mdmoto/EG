@@ -4,5 +4,6 @@ pandas
 gtts
 google-generativeai
 Pillow
+pyswisseph
 flatlib
 lunar_python
