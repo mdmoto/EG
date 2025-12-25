@@ -86,7 +86,7 @@ def reset_app():
     st.rerun()
 
 def screen_splash():
-    st.markdown('<div class="glass-panel" style="text-align: center; margin-top: 20vh; height: 40vh; display: flex; flex-direction: column; justify-content: center; align-items: center;">', unsafe_allow_html=True)
+    st.markdown('<div class="glass-panel" style="text-align: center; margin-top: 5vh; padding: 40px 20px;">', unsafe_allow_html=True)
     
     try:
         st.image("assets/logo.jpg", width=150)
