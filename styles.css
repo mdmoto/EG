@@ -186,8 +186,9 @@ h3 {
     border: none;
     background: transparent;
     margin-bottom: 20px;
-    padding: 10px 0;
-    height: 70px;
+    padding: 0;
+    height: 85px;
+    /* Increased height */
     display: flex;
     align-items: center;
     box-shadow: none;
@@ -201,6 +202,9 @@ h3 {
     /* Enlarged Font */
     white-space: nowrap;
     position: absolute;
+    top: 50%;
+    transform: translateY(-55%);
+    /* Vertically Center */
     animation: marquee-scroll 25s linear infinite;
     text-shadow: 0 0 5px #00FF00;
     font-weight: bold;
