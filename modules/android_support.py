@@ -56,9 +56,4 @@ def show_install_instructions(lang="CN"):
     """
     Displays instructions on how to install the app on Android.
     """
-    color = "#FF6B00" # chaos orange
-    
-    if lang == "CN":
-        st.info("💡 **安装到手机**: 在 Chrome 浏览器菜单中点击 **'添加到主屏幕'** 即可像原生 App 一样使用。")
-    else:
-        st.info("💡 **Install App**: Tap browser menu -> **'Add to Home Screen'** to install as a native App.")
+    pass

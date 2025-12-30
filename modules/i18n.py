@@ -1,9 +1,9 @@
 
 TRANSLATIONS = {
     "CN": {
-        "title": "熵之神",
+        "title": "商之预言",
         "splash_logo_missing": "[图标丢失]",
-        "splash_title": "熵 之 神",
+        "splash_title": "商之预言",
         "splash_subtitle": "// 系统唤醒中 //",
         "splash_intro": "这是一个综合了东方的紫微斗数生辰八字、西方的星座和星盘等等的综合占卜方式，结合全人类的所有数据和知识的AI进行宏观计算，反馈的最客观结果，请记住，当数据足够庞大和详细，占卜和预测未来就是科学。",
         "splash_init_btn": ">>> 初始化系统 <<<",
@@ -24,14 +24,14 @@ TRANSLATIONS = {
         "rad_day_master": "元神",
         "rad_animal": "灵兽",
         "rad_west_title": "西方矢量",
-        "rad_sun": "阳座",
-        "rad_moon": "阴座",
+        "rad_sun": "太阳星座",
+        "rad_moon": "月亮星座",
         "rad_tab_void": "虚空询问",
         "rad_tab_lens": "透镜预言",
         
         "void_input_label": "目标变量 (选填)",
         "void_input_placeholder": "留空以获取今日综合运势分析",
-        "void_btn": "询问虚空",
+        "void_btn": "熵之预言",
         "void_default_query": "关于系统稳定性和熵值的今日综合分析。",
         "void_processing": "计算中...",
         "void_aligning": "正在对齐",
