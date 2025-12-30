@@ -155,10 +155,11 @@ def screen_calibration():
         with col2:
             phone = st.text_input(get_text("cal_phone_label", LANG), value=def_phone)
             
+        
+    with st.expander(get_text("cal_region_label", LANG), expanded=True):
         d = st.date_input(get_text("cal_date_label", LANG), value=def_date, min_value=datetime.date(1901, 1, 1), max_value=datetime.date.today())
         h = 12 
         
-    with st.expander(get_text("cal_region_label", LANG), expanded=True):
         country_list = list(LOCATIONS.keys())
         # Default to China
         c_index = 0

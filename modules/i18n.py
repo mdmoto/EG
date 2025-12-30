@@ -14,7 +14,7 @@ TRANSLATIONS = {
         "cal_name_label": "代号 (姓名)",
         "cal_phone_label": "关键链路 (手机号或其他和自己绑定的最紧密的一串数字，8位数以上)",
         "cal_date_label": "初始日期 (生日)",
-        "cal_region_label": "出生地域 (影响星盘计算)",
+        "cal_region_label": "时空信息数据",
         "cal_country": "国家 / 地区",
         "cal_city": "城市 / 坐标",
         "cal_btn": "建立连接",
