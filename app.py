@@ -19,6 +19,7 @@ from modules.i18n import get_text
 # from modules.storage import load_profile, save_profile # DEPRECATED: Filesystem storage is not multi-user safe
 import extra_streamlit_components as stx
 import json
+from modules.locations import LOCATIONS, get_coordinates
 
 # --- PAGE CONFIG ---
 st.set_page_config(
@@ -135,7 +136,11 @@ def screen_calibration():
         except:
             def_date = None
         if saved_profile:
-            user = UserEntity(saved_profile["name"], saved_profile["dob_year"], saved_profile["dob_month"], saved_profile["dob_day"], 12, saved_profile["phone"])
+            # Lat/Lon persistence would ideally be here too, but for MVP falling back to default or re-entry is okay 
+            # if we don't change cookie structure.
+            # actually better to load it if we saved it, but schema might break old cookies. 
+            # Let's simple init:
+            user = UserEntity(saved_profile["name"], saved_profile["dob_year"], saved_profile["dob_month"], saved_profile["dob_day"], 12, saved_profile["phone"]) # Defaults lat/lon in class
             st.session_state.user_data = user
             
             # Pre-calculate data
@@ -152,6 +157,23 @@ def screen_calibration():
             
         d = st.date_input(get_text("cal_date_label", LANG), value=def_date, min_value=datetime.date(1901, 1, 1), max_value=datetime.date.today())
         h = 12 
+        
+    with st.expander(get_text("cal_region_label", LANG), expanded=True):
+        country_list = list(LOCATIONS.keys())
+        # Default to China
+        c_index = 0
+        for i, c in enumerate(country_list):
+            if "China" in c:
+                c_index = i
+                break
+                
+        sel_country = st.selectbox(get_text("cal_country", LANG), country_list, index=c_index)
+        
+        city_list = list(LOCATIONS[sel_country].keys())
+        sel_city = st.selectbox(get_text("cal_city", LANG), city_list)
+        
+        # Get coords
+        lat, lon = get_coordinates(sel_country, sel_city) 
 
     st.markdown('<div class="chaos-btn">', unsafe_allow_html=True)
     if st.button(get_text("cal_btn", LANG)):
@@ -171,7 +193,7 @@ def screen_calibration():
                 cookie_manager.set("user_profile", json.dumps(profile_data), expires_at=datetime.datetime.now() + datetime.timedelta(days=30))
                 
                 # Proceed immediately using Session State (Memory)
-                user = UserEntity(name, d.year, d.month, d.day, h, phone)
+                user = UserEntity(name, d.year, d.month, d.day, h, phone, lat=lat, lon=lon)
                 st.session_state.user_data = user
                 go_to_radiant()
     st.markdown('</div>', unsafe_allow_html=True)
