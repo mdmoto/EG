@@ -1,9 +1,9 @@
 
 TRANSLATIONS = {
     "CN": {
-        "title": "商之预言",
+        "title": "熵之预言",
         "splash_logo_missing": "[图标丢失]",
-        "splash_title": "商之预言",
+        "splash_title": "熵之预言",
         "splash_subtitle": "// 系统唤醒中 //",
         "splash_intro": "这是一个综合了东方的紫微斗数生辰八字、西方的星座和星盘等等的综合占卜方式，结合全人类的所有数据和知识的AI进行宏观计算，反馈的最客观结果，请记住，当数据足够庞大和详细，占卜和预测未来就是科学。",
         "splash_init_btn": ">>> 初始化系统 <<<",
@@ -12,7 +12,7 @@ TRANSLATIONS = {
         "cal_title": "// 身份锚点校准",
         "cal_meta_label": "身份元数据 (必填)",
         "cal_name_label": "代号 (姓名)",
-        "cal_phone_label": "通讯链路 (手机号)",
+        "cal_phone_label": "关键链路 (手机号或其他和自己绑定的最紧密的一串数字，8位数以上)",
         "cal_date_label": "初始日期 (生日)",
         "cal_btn": "建立连接",
         "cal_error_missing": "数据缺失。请补全所有字段。",
