@@ -4,8 +4,8 @@ import json
 
 def get_manifest_data_url():
     manifest = {
-        "name": "Entropy God",
-        "short_name": "EntropyGod",
+        "name": "熵之预言",
+        "short_name": "熵之预言",
         "start_url": "/",
         "display": "standalone",
         "background_color": "#050508",
@@ -42,12 +42,12 @@ def inject_pwa_meta():
     <!-- Android/Chrome -->
     <meta name="theme-color" content="#050508">
     <meta name="mobile-web-app-capable" content="yes">
-    <meta name="application-name" content="Entropy God">
+    <meta name="application-name" content="熵之预言">
     
     <!-- iOS/Safari -->
     <meta name="apple-mobile-web-app-capable" content="yes">
     <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
-    <meta name="apple-mobile-web-app-title" content="Entropy God">
+    <meta name="apple-mobile-web-app-title" content="熵之预言">
     """
     
     st.markdown(meta_tags, unsafe_allow_html=True)

@@ -23,7 +23,7 @@ from modules.locations import LOCATIONS, get_coordinates
 
 # --- PAGE CONFIG ---
 st.set_page_config(
-    page_title="Entropy God",
+    page_title="熵之预言",
     page_icon="assets/logo.jpg",
     layout="wide",
     initial_sidebar_state="expanded"
