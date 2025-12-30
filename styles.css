@@ -64,15 +64,15 @@ div[data-testid="stImage"] {
     display: flex;
     justify-content: center;
     align-items: center;
-    width: 60%;
-    /* Only take 60% of width on desktop to keep it sane */
+    width: 25% !important;
+    /* 1/4 size as requested */
     margin: 0 auto;
 }
 
 @media (max-width: 600px) {
     div[data-testid="stImage"] {
-        width: 100% !important;
-        /* Full width on mobile */
+        width: 33% !important;
+        /* Slightly larger on mobile for visibility, but still small */
     }
 }
 
