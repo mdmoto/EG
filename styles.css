@@ -29,6 +29,56 @@ body,
 .block-container {
     padding-top: 1rem !important;
     padding-bottom: 5rem !important;
+    padding-left: 0 !important;
+    padding-right: 0 !important;
+    max-width: 100% !important;
+}
+
+/* RESPONSIVE CONTAINER WRAPPER */
+/* Since we switched to 'wide' layout, we need to constrain width on desktop manually */
+div[data-testid="stVerticalBlock"] {
+    width: 100%;
+    margin: 0 auto;
+}
+
+@media (min-width: 800px) {
+    div[data-testid="stVerticalBlock"] {
+        max-width: 800px;
+    }
+
+    /* Re-center the block if needed, though 'margin: 0 auto' on inner might not work 
+       if the parent is full width. We target the specific content structure. */
+}
+
+/* IMAGE CENTERING & SCALING */
+img {
+    max-width: 100% !important;
+    height: auto !important;
+    object-fit: contain;
+    border-radius: 10px;
+    /* Optional: adds a bit of polish */
+}
+
+div[data-testid="stImage"] {
+    text-align: center;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 60%;
+    /* Only take 60% of width on desktop to keep it sane */
+    margin: 0 auto;
+}
+
+@media (max-width: 600px) {
+    div[data-testid="stImage"] {
+        width: 100% !important;
+        /* Full width on mobile */
+    }
+}
+
+div[data-testid="stImage"]>img {
+    margin: 0 auto;
+    width: 100% !important;
 }
 
 h1,
@@ -234,16 +284,44 @@ h3 {
 
 @media (max-width: 600px) {
     .glass-panel {
-        padding: 10px;
+        padding: 5px;
+        /* Minimized padding */
     }
 
     .metric-box {
-        padding: 10px;
+        padding: 5px;
     }
 
     .metric-value-east,
     .metric-value-west {
         font-size: 0.9em;
+    }
+
+    .status-widget {
+        width: auto !important;
+        position: relative !important;
+        top: 0 !important;
+        right: 0 !important;
+        margin-bottom: 15px;
+        border-radius: 4px;
+        width: 100%;
+        display: flex;
+        flex-direction: row;
+        flex-wrap: wrap;
+        justify-content: space-between;
+        align-items: center;
+        gap: 10px;
+    }
+
+    .status-line {
+        margin-bottom: 0;
+        font-size: 0.8em;
+        margin-right: 10px;
+    }
+
+    .tech-header {
+        font-size: 1em;
+        transform: translateY(-28px);
     }
 }
 
@@ -270,22 +348,26 @@ header {
 /* --- CYBERPUNK HUD OVERHAUL (V2 Refined) --- */
 
 /* 1. STATUS WIDGET (Top Right - Non-overlapping) */
+/* 1. STATUS WIDGET (Responsive Flow) */
 .status-widget {
-    /* Changed from fixed to absolute to scroll with page and avoid perm-overlap on small screens */
-    position: absolute;
-    top: 5px;
-    right: 5px;
-    width: 200px;
+    position: relative;
+    /* Changed from absolute to relative for ALL screens to avoid overlap */
+    width: 100%;
+    max-width: 800px;
+    /* Match content width */
+    margin: 0 auto 20px auto;
+    /* Center and add bottom margin */
     padding: 10px;
     background: rgba(0, 10, 20, 0.9);
     border: 1px solid var(--order-blue);
-    z-index: 100;
-    font-family: 'Share Tech Mono', monospace;
-    font-size: 0.8em;
-    color: var(--order-blue);
-    border-radius: 0 0 0 15px;
-    /* Cut corner */
+    border-radius: 0 0 15px 15px;
+    /* Bottom rounded corners */
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
     box-shadow: 0 0 10px rgba(0, 240, 255, 0.1);
+    box-sizing: border-box;
+    /* Ensure padding doesn't overflow width */
 }
 
 .status-line {
@@ -336,7 +418,8 @@ header {
     position: relative;
     padding: 25px 15px;
     margin-bottom: 30px;
-    margin-top: 10px;
+    margin-top: 50px;
+    /* Increased to prevent header overlap */
     background: rgba(0, 5, 10, 0.3);
     /* Subtle background */
 }

@@ -24,7 +24,7 @@ import json
 st.set_page_config(
     page_title="Entropy God",
     page_icon="assets/logo.jpg",
-    layout="centered",
+    layout="wide",
     initial_sidebar_state="expanded"
 )
 
@@ -90,7 +90,7 @@ def screen_splash():
     st.markdown('<div style="text-align: center; margin-top: 10vh;">', unsafe_allow_html=True)
     
     try:
-        st.image("assets/logo.jpg", width=150)
+        st.image("assets/logo.jpg", use_container_width=True)
     except:
         st.write(get_text("splash_logo_missing", LANG))
     
@@ -227,7 +227,7 @@ def screen_radiant():
     # CENTRAL LOGO (Visual Key)
     st.markdown('<div style="text-align: center; margin: 20px 0;">', unsafe_allow_html=True)
     try:
-        st.image("assets/logo.jpg", width=80) 
+        st.image("assets/logo.jpg", use_container_width=True) 
     except:
         pass
     st.markdown('</div>', unsafe_allow_html=True)

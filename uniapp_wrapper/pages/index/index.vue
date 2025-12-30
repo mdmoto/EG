@@ -12,7 +12,7 @@
 				// IMPORTANT: Replace this with your computer's IP address!
 				// 注意：请将此处替换为您电脑的 IP 地址！
 				// Example: 'http://192.168.1.5:8501'
-				url: 'https://god.maollar.com' 
+				url: 'https://5gx37mny8cenuapfdxetoz.streamlit.app/?embed=true' 
 			}
 		},
 		onLoad() {
