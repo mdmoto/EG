@@ -23,6 +23,62 @@ body,
     color: var(--titanium);
     font-family: 'Share Tech Mono', monospace;
     overflow-x: hidden;
+    position: relative;
+}
+
+/* ANIMATED BACKGROUND EFFECTS */
+.stApp::before {
+    content: '';
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-image:
+        linear-gradient(rgba(0, 240, 255, 0.03) 1px, transparent 1px),
+        linear-gradient(90deg, rgba(0, 240, 255, 0.03) 1px, transparent 1px);
+    background-size: 50px 50px;
+    animation: grid-flow 20s linear infinite;
+    pointer-events: none;
+    z-index: 0;
+}
+
+.stApp::after {
+    content: '';
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: repeating-linear-gradient(0deg,
+            rgba(0, 0, 0, 0.15),
+            rgba(0, 0, 0, 0.15) 1px,
+            transparent 1px,
+            transparent 2px);
+    animation: scanline 8s linear infinite;
+    pointer-events: none;
+    z-index: 1;
+    opacity: 0.3;
+}
+
+@keyframes grid-flow {
+    0% {
+        transform: translateY(0);
+    }
+
+    100% {
+        transform: translateY(50px);
+    }
+}
+
+@keyframes scanline {
+    0% {
+        transform: translateY(0);
+    }
+
+    100% {
+        transform: translateY(100%);
+    }
 }
 
 /* REDUCE TOP PADDING FOR MOBILE */
@@ -32,6 +88,8 @@ body,
     padding-left: 0 !important;
     padding-right: 0 !important;
     max-width: 100% !important;
+    position: relative;
+    z-index: 2;
 }
 
 /* RESPONSIVE CONTAINER WRAPPER */
@@ -172,6 +230,30 @@ h3 {
 }
 
 /* METRICS */
+.central-logo-container {
+    text-align: center;
+    margin: 20px 0;
+}
+
+.central-logo-container img {
+    animation: logo-breathe 4s ease-in-out infinite;
+    filter: drop-shadow(0 0 10px rgba(0, 240, 255, 0.3)) drop-shadow(0 0 20px rgba(255, 107, 0, 0.2));
+}
+
+@keyframes logo-breathe {
+
+    0%,
+    100% {
+        transform: scale(1);
+        filter: drop-shadow(0 0 10px rgba(0, 240, 255, 0.3)) drop-shadow(0 0 20px rgba(255, 107, 0, 0.2));
+    }
+
+    50% {
+        transform: scale(1.05);
+        filter: drop-shadow(0 0 15px rgba(0, 240, 255, 0.5)) drop-shadow(0 0 25px rgba(255, 107, 0, 0.4));
+    }
+}
+
 .metric-box {
     text-align: center;
     border: 1px solid rgba(192, 192, 192, 0.2);
@@ -192,6 +274,7 @@ h3 {
     font-size: 1.1em;
     font-weight: bold;
     text-shadow: 0 0 5px var(--order-blue);
+    animation: pulse-glow-cyan 3s ease-in-out infinite;
 }
 
 .metric-value-west {
@@ -199,6 +282,31 @@ h3 {
     font-size: 1.1em;
     font-weight: bold;
     text-shadow: 0 0 5px var(--chaos-orange);
+    animation: pulse-glow-orange 3s ease-in-out infinite;
+}
+
+@keyframes pulse-glow-cyan {
+
+    0%,
+    100% {
+        text-shadow: 0 0 5px var(--order-blue), 0 0 10px rgba(0, 240, 255, 0.3);
+    }
+
+    50% {
+        text-shadow: 0 0 10px var(--order-blue), 0 0 20px rgba(0, 240, 255, 0.5), 0 0 30px rgba(0, 240, 255, 0.2);
+    }
+}
+
+@keyframes pulse-glow-orange {
+
+    0%,
+    100% {
+        text-shadow: 0 0 5px var(--chaos-orange), 0 0 10px rgba(255, 107, 0, 0.3);
+    }
+
+    50% {
+        text-shadow: 0 0 10px var(--chaos-orange), 0 0 20px rgba(255, 107, 0, 0.5), 0 0 30px rgba(255, 107, 0, 0.2);
+    }
 }
 
 /* ANIMATIONS */
@@ -421,22 +529,31 @@ footer {
 /* 1. STATUS WIDGET (Responsive Flow) */
 .status-widget {
     position: relative;
-    /* Changed from absolute to relative for ALL screens to avoid overlap */
     width: 100%;
     max-width: 800px;
     margin: 0 auto 10px auto;
-    /* Center and add bottom margin */
     padding: 8px;
     background: rgba(0, 10, 20, 0.9);
     border: 1px solid var(--order-blue);
     border-radius: 0 0 15px 15px;
-    /* Bottom rounded corners */
     display: flex;
     justify-content: space-between;
     align-items: center;
-    box-shadow: 0 0 10px rgba(0, 240, 255, 0.1);
+    box-shadow: 0 0 10px rgba(0, 240, 255, 0.1), inset 0 0 20px rgba(0, 240, 255, 0.05);
     box-sizing: border-box;
-    /* Ensure padding doesn't overflow width */
+    animation: status-glow 3s ease-in-out infinite;
+}
+
+@keyframes status-glow {
+
+    0%,
+    100% {
+        box-shadow: 0 0 10px rgba(0, 240, 255, 0.1), inset 0 0 20px rgba(0, 240, 255, 0.05);
+    }
+
+    50% {
+        box-shadow: 0 0 20px rgba(0, 240, 255, 0.3), inset 0 0 30px rgba(0, 240, 255, 0.1);
+    }
 }
 
 .status-line {
@@ -485,16 +602,10 @@ footer {
 /* 2. TECH FRAMES (Corner Brackets Style) */
 .tech-frame {
     position: relative;
-    padding: 25px 15px;
-    margin-bottom: 30px;
-    margin-top: 50px;
-    /* Increased to prevent header overlap */
+    padding: 15px 10px;
+    margin-bottom: 10px;
+    margin-top: 20px;
     background: rgba(0, 5, 10, 0.3);
-    /* Subtle background */
-}
-
-/* Corner Bracket Logic via Gradients (No images needed) */
-.tf-cyan {
     /* Top-Left & Top-Right & Bottom-Left & Bottom-Right Corners */
     background-image:
         linear-gradient(var(--order-blue), var(--order-blue)),
