@@ -606,40 +606,7 @@ footer {
     margin-bottom: 10px;
     margin-top: 20px;
     background: rgba(0, 5, 10, 0.3);
-    /* Top-Left & Top-Right & Bottom-Left & Bottom-Right Corners */
-    background-image:
-        linear-gradient(var(--order-blue), var(--order-blue)),
-        linear-gradient(var(--order-blue), var(--order-blue)),
-        linear-gradient(var(--order-blue), var(--order-blue)),
-        linear-gradient(var(--order-blue), var(--order-blue));
-    background-repeat: no-repeat;
-    background-size: 2px 20px, 20px 2px;
-    /* Thickness Length */
-    background-position:
-        0 0, 0 0,
-        /* Top-Left Vertical, Top-Left Horizontal */
-        100% 0, 100% 0,
-        /* Top-Right */
-        0 100%, 0 100%,
-        /* Bottom-Left */
-        100% 100%, 100% 100%;
-    /* Bottom-Right */
-    /* Wait, css gradient syntax for multiple corners is tricky. 
-       Let's use a cleaner approach with pseudo-elements for the main "Bracket" look 
-    */
-    background:
-        linear-gradient(to right, var(--order-blue) 2px, transparent 2px) 0 0,
-        linear-gradient(to bottom, var(--order-blue) 2px, transparent 2px) 0 0,
-        linear-gradient(to left, var(--order-blue) 2px, transparent 2px) 100% 0,
-        linear-gradient(to bottom, var(--order-blue) 2px, transparent 2px) 100% 0,
-        linear-gradient(to right, var(--order-blue) 2px, transparent 2px) 0 100%,
-        linear-gradient(to top, var(--order-blue) 2px, transparent 2px) 0 100%,
-        linear-gradient(to left, var(--order-blue) 2px, transparent 2px) 100% 100%,
-        linear-gradient(to top, var(--order-blue) 2px, transparent 2px) 100% 100%;
-    background-repeat: no-repeat;
-    background-size: 20px 20px;
     box-shadow: inset 0 0 20px rgba(0, 240, 255, 0.05);
-    /* Inner Glow */
 }
 
 .tf-orange {
