@@ -290,7 +290,7 @@ def screen_radiant():
     """, unsafe_allow_html=True)
 
     # CENTRAL LOGO (Visual Key)
-    st.markdown('<div style="text-align: center; margin: 20px 0;">', unsafe_allow_html=True)
+    st.markdown('<div class="central-logo-container">', unsafe_allow_html=True)
     try:
         st.image("assets/logo.jpg", use_container_width=True) 
     except:
