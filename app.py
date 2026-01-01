@@ -123,8 +123,6 @@ def screen_splash():
         st.session_state.lang = new_lang_code
         st.rerun()
 
-    st.markdown("<br>", unsafe_allow_html=True)
-
     # 2. LOGO & TITLE
     try:
         st.image("assets/logo.jpg", use_container_width=True)
@@ -151,7 +149,6 @@ def screen_splash():
             time.sleep(1.5)
         go_to_calibration()
     
-    st.markdown("<br>", unsafe_allow_html=True)
     # Removed install instructions as per previous request
     show_install_instructions(st.session_state.lang)
 
@@ -274,8 +271,6 @@ def screen_radiant():
         </div>
     </div>
     """, unsafe_allow_html=True)
-    
-    st.markdown("<br><br>", unsafe_allow_html=True) # Spacer for fixed widget
     
     # 2. EASTERN VECTOR (Tech Frame Cyan)
     st.markdown(f"""
