@@ -125,7 +125,7 @@ def screen_splash():
 
     # 2. LOGO & TITLE
     try:
-        st.image("assets/logo.jpg", width="stretch")
+        st.image("assets/logo.jpg", use_container_width=True)
     except:
         st.write(get_text("splash_logo_missing", st.session_state.lang))
     
@@ -290,8 +290,14 @@ def screen_radiant():
     """, unsafe_allow_html=True)
 
     # CENTRAL LOGO (Visual Key)
+    # Replaced st.image with HTML/Base64 to allow CSS hiding on mobile
     try:
-        st.image("assets/logo.jpg", width="stretch") 
+        logo_b64 = get_base64_of_bin_file("assets/logo.jpg")
+        st.markdown(f"""
+        <div class="central-logo-container">
+            <img src="data:image/jpeg;base64,{logo_b64}" style="width: 25%; max-width: 200px; border-radius: 10px;">
+        </div>
+        """, unsafe_allow_html=True)
     except:
         pass
 
