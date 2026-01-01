@@ -23,6 +23,36 @@ body,
     color: var(--titanium);
     font-family: 'Share Tech Mono', monospace;
     overflow-x: hidden;
+    position: relative;
+}
+
+/* Animated Particle Background */
+.stApp::before {
+    content: '';
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-image:
+        radial-gradient(circle, rgba(0, 240, 255, 0.15) 2px, transparent 2px),
+        radial-gradient(circle, rgba(255, 107, 0, 0.1) 1px, transparent 1px);
+    background-size: 60px 60px, 100px 100px;
+    background-position: 0 0, 50px 50px;
+    animation: particle-drift 40s linear infinite;
+    pointer-events: none;
+    z-index: 0;
+    opacity: 0.6;
+}
+
+@keyframes particle-drift {
+    0% {
+        transform: translate(0, 0);
+    }
+
+    100% {
+        transform: translate(60px, 60px);
+    }
 }
 
 /* REDUCE TOP PADDING FOR MOBILE */
@@ -189,16 +219,42 @@ h3 {
 
 .metric-value-east {
     color: var(--order-blue);
-    font-size: 1.1em;
+    font-size: 1.2em;
     font-weight: bold;
-    text-shadow: 0 0 5px var(--order-blue);
+    text-shadow: 0 0 8px var(--order-blue), 0 0 15px rgba(0, 240, 255, 0.4);
+    animation: glow-pulse-cyan 2.5s ease-in-out infinite;
 }
 
 .metric-value-west {
     color: var(--chaos-orange);
-    font-size: 1.1em;
+    font-size: 1.2em;
     font-weight: bold;
-    text-shadow: 0 0 5px var(--chaos-orange);
+    text-shadow: 0 0 8px var(--chaos-orange), 0 0 15px rgba(255, 107, 0, 0.4);
+    animation: glow-pulse-orange 2.5s ease-in-out infinite;
+}
+
+@keyframes glow-pulse-cyan {
+
+    0%,
+    100% {
+        text-shadow: 0 0 8px var(--order-blue), 0 0 15px rgba(0, 240, 255, 0.4);
+    }
+
+    50% {
+        text-shadow: 0 0 15px var(--order-blue), 0 0 25px rgba(0, 240, 255, 0.6), 0 0 35px rgba(0, 240, 255, 0.3);
+    }
+}
+
+@keyframes glow-pulse-orange {
+
+    0%,
+    100% {
+        text-shadow: 0 0 8px var(--chaos-orange), 0 0 15px rgba(255, 107, 0, 0.4);
+    }
+
+    50% {
+        text-shadow: 0 0 15px var(--chaos-orange), 0 0 25px rgba(255, 107, 0, 0.6), 0 0 35px rgba(255, 107, 0, 0.3);
+    }
 }
 
 /* ANIMATIONS */
