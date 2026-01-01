@@ -327,14 +327,19 @@ h3 {
 
     /* Restore Logo but COMPRESS size significantly */
     .central-logo-container {
-        display: block !important;
-        margin: 2px 0 !important;
+        display: flex !important;
+        justify-content: center !important;
+        align-items: center !important;
+        margin: 5px 0 !important;
+        width: 100% !important;
     }
 
     .central-logo-container img {
-        height: 50px !important;
+        height: 80px !important;
         width: auto !important;
         max-width: 100% !important;
+        display: block !important;
+        object-fit: contain !important;
     }
 
     .glass-panel {
