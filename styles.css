@@ -324,13 +324,27 @@ h3 {
 }
 
 @media (max-width: 600px) {
+
+    /* Hide Central Logo to save significant space */
+    .central-logo-container {
+        display: none !important;
+    }
+
     .glass-panel {
         padding: 5px;
         /* Minimized padding */
+        margin-bottom: 5px;
+        /* Compact margin */
+    }
+
+    .metric-grid {
+        gap: 5px;
+        /* Tighter grid */
     }
 
     .metric-box {
-        padding: 5px;
+        padding: 2px;
+        /* Minimal padding */
     }
 
     .metric-value-east,
@@ -343,7 +357,8 @@ h3 {
         position: relative !important;
         top: 0 !important;
         right: 0 !important;
-        margin-bottom: 15px;
+        margin-bottom: 5px;
+        /* Compact margin */
         border-radius: 4px;
         width: 100%;
         display: flex;
@@ -351,7 +366,8 @@ h3 {
         flex-wrap: wrap;
         justify-content: space-between;
         align-items: center;
-        gap: 10px;
+        gap: 5px;
+        padding: 5px;
     }
 
     .status-line {
@@ -362,7 +378,15 @@ h3 {
 
     .tech-header {
         font-size: 1em;
-        transform: translateY(-28px);
+        transform: translateY(-22px);
+        /* Tighter header pos */
+        background: rgba(0, 0, 0, 0.8);
+        /* Ensure readability over border */
+        padding: 0 5px;
+    }
+
+    div[data-testid="stImage"] {
+        width: 33% !important;
     }
 }
 
