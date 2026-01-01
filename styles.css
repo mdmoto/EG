@@ -168,39 +168,37 @@ h3 {
 /* BUTTONS */
 .stButton>button {
     background: transparent !important;
-    border: 1px solid var(--order-blue) !important;
+    border: 2px solid var(--order-blue) !important;
     color: var(--order-blue) !important;
+    box-shadow: 0 0 15px rgba(0, 240, 255, 0.4) !important;
     border-radius: 0 !important;
     text-transform: uppercase;
     font-family: 'Orbitron', sans-serif !important;
     letter-spacing: 0.2em;
-    transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275) !important;
+    transition: all 0.3s ease !important;
     position: relative;
     overflow: hidden;
 }
 
-.stButton>button:hover {
-    background: rgba(0, 240, 255, 0.15) !important;
-    box-shadow: 0 0 20px rgba(0, 240, 255, 0.6), inset 0 0 20px rgba(0, 240, 255, 0.2) !important;
-    text-shadow: 0 0 10px var(--order-blue);
-    transform: scale(1.05);
+/* Remove hover effects for mobile - not needed on touch devices */
+.stButton>button:active {
+    transform: scale(0.98);
+    box-shadow: 0 0 25px rgba(0, 240, 255, 0.6) !important;
 }
 
-/* CHAOS BUTTON (Primary Action) */
+/* CHAOS BUTTON (Primary Action) - Always glowing for mobile */
 .chaos-btn>button {
     border-color: var(--chaos-orange) !important;
     color: var(--chaos-orange) !important;
-    box-shadow: var(--chaos-glow) !important;
+    box-shadow: 0 0 20px rgba(255, 107, 0, 0.6) !important;
     font-weight: bold;
     font-size: 1.2em !important;
     padding: 1.5rem !important;
 }
 
-.chaos-btn>button:hover {
-    background: rgba(255, 107, 0, 0.15) !important;
-    box-shadow: 0 0 35px rgba(255, 107, 0, 0.8), inset 0 0 25px rgba(255, 107, 0, 0.3) !important;
-    text-shadow: 0 0 12px var(--chaos-orange);
-    transform: scale(1.05);
+.chaos-btn>button:active {
+    transform: scale(0.98);
+    box-shadow: 0 0 30px rgba(255, 107, 0, 0.8) !important;
 }
 
 .central-logo-container {
