@@ -125,7 +125,7 @@ def screen_splash():
 
     # 2. LOGO & TITLE
     try:
-        st.image("assets/logo.jpg", use_container_width=True)
+        st.image("assets/logo.jpg", width="stretch")
     except:
         st.write(get_text("splash_logo_missing", st.session_state.lang))
     
