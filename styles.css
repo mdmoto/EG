@@ -325,9 +325,16 @@ h3 {
 
 @media (max-width: 800px) {
 
-    /* Hide Central Logo to save significant space */
+    /* Restore Logo but COMPRESS size significantly */
     .central-logo-container {
-        display: none !important;
+        display: block !important;
+        margin: 2px 0 !important;
+    }
+
+    .central-logo-container img {
+        height: 50px !important;
+        width: auto !important;
+        max-width: 100% !important;
     }
 
     .glass-panel {
