@@ -125,7 +125,7 @@ def screen_splash():
 
     # 2. LOGO & TITLE
     try:
-        st.image("assets/logo.jpg", width="stretch")
+        st.image("assets/logo.jpg", use_container_width=True)
     except:
         st.write(get_text("splash_logo_missing", st.session_state.lang))
     
@@ -275,7 +275,7 @@ def screen_radiant():
     # 2. EASTERN VECTOR (Tech Frame Cyan)
     st.markdown(f"""
     <div class="tech-frame tf-cyan">
-        <div class="tech-header tf-cyan">▸ {get_text("rad_west_title", LANG).replace("Western", "Eastern").replace("西方", "东方")} ◂</div>
+        <div class="tech-header tf-cyan">{get_text("rad_west_title", LANG).replace("Western", "Eastern").replace("西方", "东方")}</div>
         <div class="metric-grid">
             <div class="metric-box" style="border: 1px solid var(--order-blue); box-shadow: inset 0 0 15px rgba(0, 240, 255, 0.2);">
                 <div class="metric-label">{get_text('rad_day_master', LANG)}</div>
@@ -304,7 +304,7 @@ def screen_radiant():
     # 3. WESTERN VECTOR (Tech Frame Orange)
     st.markdown(f"""
     <div class="tech-frame tf-orange">
-        <div class="tech-header tf-orange">▸ {get_text("rad_west_title", LANG)} ◂</div>
+        <div class="tech-header tf-orange">{get_text("rad_west_title", LANG)}</div>
         <div class="metric-grid">
             <div class="metric-box" style="border: 1px solid var(--chaos-orange); box-shadow: inset 0 0 15px rgba(255, 107, 0, 0.2);">
                 <div class="metric-label">{get_text('rad_sun', LANG)}</div>
