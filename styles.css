@@ -323,7 +323,7 @@ h3 {
     width: 100%;
 }
 
-@media (max-width: 600px) {
+@media (max-width: 800px) {
 
     /* Hide Central Logo to save significant space */
     .central-logo-container {
@@ -391,23 +391,16 @@ h3 {
 }
 
 /* HIDE STREAMLIT UI COMPLETELY */
-#MainMenu {
-    visibility: hidden;
-    display: none !important;
-}
-
+header[data-testid="stHeader"],
+div[data-testid="stToolbar"],
 footer {
     visibility: hidden;
     display: none !important;
 }
 
-header {
+/* Force hiding standard Streamlit hamburger */
+.css-1rs6os {
     visibility: hidden;
-    display: none !important;
-}
-
-[data-testid="stToolbar"] {
-    display: none !important;
 }
 
 /* --- CYBERPUNK HUD OVERHAUL (V2 Refined) --- */
