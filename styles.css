@@ -3,30 +3,34 @@
 /* IMPORTS */
 @import url('https://fonts.googleapis.com/css2?family=Share+Tech+Mono&family=Orbitron:wght@400;700&display=swap');
 
-/* GLOBAL VARIABLES */
+/* GLOBAL VARIABLES - Dark Mystical Theme */
 :root {
-    --void-black: #050508;
-    --carbon-grey: #121212;
-    --order-blue: #00F0FF;
-    --chaos-orange: #FF6B00;
-    --titanium: #C0C0C0;
-    --glass-bg: rgba(18, 18, 18, 0.6);
-    --neon-glow: 0 0 10px rgba(0, 240, 255, 0.5);
-    --chaos-glow: 0 0 15px rgba(255, 107, 0, 0.6);
+    --void-black: #000000;
+    --deep-purple: #1E1B4B;
+    --mystic-purple: #8B5CF6;
+    --neon-purple: #A78BFA;
+    --gold: #F59E0B;
+    --bright-gold: #FCD34D;
+    --text-primary: #FFFFFF;
+    --text-secondary: rgba(255, 255, 255, 0.7);
+    --glass-bg: rgba(139, 92, 246, 0.1);
+    --glass-border: rgba(167, 139, 250, 0.3);
+    --purple-glow: 0 0 20px rgba(139, 92, 246, 0.6);
+    --gold-glow: 0 0 20px rgba(245, 158, 11, 0.6);
 }
 
 /* BASE STYLES */
 html,
 body,
 .stApp {
-    background: radial-gradient(circle at center, var(--carbon-grey) 0%, var(--void-black) 100%);
-    color: var(--titanium);
+    background: linear-gradient(135deg, var(--void-black) 0%, var(--deep-purple) 50%, #1a0a2e 100%);
+    color: var(--text-primary);
     font-family: 'Share Tech Mono', monospace;
     overflow-x: hidden;
     position: relative;
 }
 
-/* Animated Grid Background */
+/* Particle Background Effect */
 .stApp::before {
     content: '';
     position: fixed;
@@ -35,22 +39,22 @@ body,
     width: 100%;
     height: 100%;
     background-image:
-        linear-gradient(rgba(0, 240, 255, 0.05) 1px, transparent 1px),
-        linear-gradient(90deg, rgba(0, 240, 255, 0.05) 1px, transparent 1px);
-    background-size: 40px 40px;
-    animation: grid-move 30s linear infinite;
+        radial-gradient(circle, rgba(167, 139, 250, 0.1) 1px, transparent 1px),
+        radial-gradient(circle, rgba(245, 158, 11, 0.08) 1px, transparent 1px);
+    background-size: 50px 50px, 80px 80px;
+    background-position: 0 0, 40px 40px;
+    animation: particle-float 60s linear infinite;
     pointer-events: none;
     z-index: 0;
-    opacity: 0.4;
 }
 
-@keyframes grid-move {
+@keyframes particle-float {
     0% {
         transform: translate(0, 0);
     }
 
     100% {
-        transform: translate(40px, 40px);
+        transform: translate(100px, 100px);
     }
 }
 
@@ -116,20 +120,23 @@ h1,
 h2,
 h3 {
     font-family: 'Orbitron', sans-serif;
-    letter-spacing: 0.15em;
+    letter-spacing: 0.1em;
     text-transform: uppercase;
-    text-shadow: var(--neon-glow);
+    background: linear-gradient(135deg, var(--neon-purple), var(--bright-gold));
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+    filter: drop-shadow(0 0 10px rgba(139, 92, 246, 0.5));
 }
 
 /* GLASS CONTAINER */
 .glass-panel {
     background: var(--glass-bg);
-    backdrop-filter: blur(12px);
-    -webkit-backdrop-filter: blur(12px);
-    border: 1px solid rgba(0, 240, 255, 0.2);
-    box-shadow: 0 4px 30px rgba(0, 0, 0, 0.5);
-    border-radius: 4px;
-    /* Hard corners for tech feel */
+    backdrop-filter: blur(20px);
+    -webkit-backdrop-filter: blur(20px);
+    border: 1px solid var(--glass-border);
+    box-shadow: 0 8px 32px rgba(0, 0, 0, 0.4), inset 0 0 20px rgba(167, 139, 250, 0.1);
+    border-radius: 12px;
     padding: 15px;
     margin-bottom: 10px;
     position: relative;
@@ -165,40 +172,40 @@ h3 {
     box-shadow: var(--neon-glow) !important;
 }
 
-/* BUTTONS */
+/* BUTTONS - Redesigned */
 .stButton>button {
-    background: transparent !important;
-    border: 2px solid var(--order-blue) !important;
-    color: var(--order-blue) !important;
-    box-shadow: 0 0 15px rgba(0, 240, 255, 0.4) !important;
-    border-radius: 0 !important;
+    background: linear-gradient(135deg, var(--mystic-purple), var(--neon-purple)) !important;
+    border: 2px solid var(--neon-purple) !important;
+    color: var(--text-primary) !important;
+    box-shadow: var(--purple-glow) !important;
+    border-radius: 12px !important;
     text-transform: uppercase;
     font-family: 'Orbitron', sans-serif !important;
-    letter-spacing: 0.2em;
+    font-weight: 700 !important;
+    letter-spacing: 0.15em;
+    padding: 1rem 2rem !important;
+    font-size: 1.1em !important;
     transition: all 0.3s ease !important;
-    position: relative;
-    overflow: hidden;
 }
 
-/* Remove hover effects for mobile - not needed on touch devices */
 .stButton>button:active {
-    transform: scale(0.98);
-    box-shadow: 0 0 25px rgba(0, 240, 255, 0.6) !important;
+    transform: scale(0.95);
+    box-shadow: 0 0 30px rgba(139, 92, 246, 0.8) !important;
 }
 
-/* CHAOS BUTTON (Primary Action) - Always glowing for mobile */
+/* PRIMARY ACTION BUTTON */
 .chaos-btn>button {
-    border-color: var(--chaos-orange) !important;
-    color: var(--chaos-orange) !important;
-    box-shadow: 0 0 20px rgba(255, 107, 0, 0.6) !important;
-    font-weight: bold;
-    font-size: 1.2em !important;
-    padding: 1.5rem !important;
+    background: linear-gradient(135deg, var(--gold), var(--bright-gold)) !important;
+    border-color: var(--bright-gold) !important;
+    color: #000000 !important;
+    box-shadow: var(--gold-glow) !important;
+    font-size: 1.3em !important;
+    padding: 1.5rem 2.5rem !important;
 }
 
 .chaos-btn>button:active {
-    transform: scale(0.98);
-    box-shadow: 0 0 30px rgba(255, 107, 0, 0.8) !important;
+    transform: scale(0.95);
+    box-shadow: 0 0 35px rgba(245, 158, 11, 0.9) !important;
 }
 
 .central-logo-container {
@@ -240,42 +247,42 @@ h3 {
 }
 
 .metric-value-east {
-    color: var(--order-blue);
-    font-size: 1.1em;
+    color: var(--neon-purple);
+    font-size: 1.3em;
     font-weight: bold;
-    text-shadow: 0 0 5px var(--order-blue);
-    animation: glow-pulse-cyan 2s ease-in-out infinite;
+    text-shadow: 0 0 10px var(--neon-purple);
+    animation: glow-pulse-purple 2s ease-in-out infinite;
 }
 
 .metric-value-west {
-    color: var(--chaos-orange);
-    font-size: 1.1em;
+    color: var(--bright-gold);
+    font-size: 1.3em;
     font-weight: bold;
-    text-shadow: 0 0 5px var(--chaos-orange);
-    animation: glow-pulse-orange 2s ease-in-out infinite;
+    text-shadow: 0 0 10px var(--gold);
+    animation: glow-pulse-gold 2s ease-in-out infinite;
 }
 
-@keyframes glow-pulse-cyan {
+@keyframes glow-pulse-purple {
 
     0%,
     100% {
-        text-shadow: 0 0 5px var(--order-blue);
+        text-shadow: 0 0 10px var(--neon-purple);
     }
 
     50% {
-        text-shadow: 0 0 15px var(--order-blue), 0 0 25px rgba(0, 240, 255, 0.5);
+        text-shadow: 0 0 20px var(--neon-purple), 0 0 30px rgba(167, 139, 250, 0.6);
     }
 }
 
-@keyframes glow-pulse-orange {
+@keyframes glow-pulse-gold {
 
     0%,
     100% {
-        text-shadow: 0 0 5px var(--chaos-orange);
+        text-shadow: 0 0 10px var(--gold);
     }
 
     50% {
-        text-shadow: 0 0 15px var(--chaos-orange), 0 0 25px rgba(255, 107, 0, 0.5);
+        text-shadow: 0 0 20px var(--gold), 0 0 30px rgba(245, 158, 11, 0.6);
     }
 }
 
