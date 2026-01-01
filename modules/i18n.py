@@ -51,6 +51,7 @@ TRANSLATIONS = {
         
         "lens_info": "上传物品以进行分析 (物体预言)",
         "lens_cam_label": "扫描物体",
+        "lens_upload_label": "上传图片 / 拍摄",
         "lens_btn": "分析造物",
         "lens_processing": "视觉皮层已介入...",
         
@@ -106,6 +107,7 @@ This is not superstition, but a prediction given by algorithms.""",
         
         "lens_info": "UPLOAD ARTIFACT FOR ANALYSIS (Object Prophecy)",
         "lens_cam_label": "SCAN OBJECT",
+        "lens_upload_label": "UPLOAD IMAGE / TAKE PHOTO",
         "lens_btn": "ANALYZE ARTIFACT",
         "lens_processing": "VISUAL CORTEX ENGAGED...",
         

@@ -371,8 +371,16 @@ def screen_radiant():
         
     with tab_lens:
         st.info(get_text("lens_info", LANG))
-        # CAMERA INPUT IS PRIMARY
-        img_file = st.camera_input(get_text("lens_cam_label", LANG))
+        
+        # DUAL INPUT STRATEGY FOR MOBILE COMPATIBILITY
+        # 1. Streamlit Camera Input (Works well on Desktop/modern browsers)
+        cam_file = st.camera_input(get_text("lens_cam_label", LANG))
+        
+        # 2. File Uploader (Fallback: Triggers native OS camera picker on mobile)
+        upload_file = st.file_uploader(get_text("lens_upload_label", LANG), type=['jpg', 'jpeg', 'png'])
+        
+        # Prioritize Camera, then Upload
+        img_file = cam_file if cam_file else upload_file
         
         if img_file:
             st.markdown('<div class="chaos-btn">', unsafe_allow_html=True)
