@@ -54,9 +54,26 @@ if 'prediction_result' not in st.session_state:
 if 'audio_data' not in st.session_state:
     st.session_state.audio_data = None
 
-# --- LANGUAGE SELECTOR ---
-lang_option = st.sidebar.selectbox("LANGUAGE / 语言", ["中文", "English"], index=0)
-LANG = "CN" if lang_option == "中文" else "EN"
+# --- LANGUAGE SELECTOR & GLOBAL STATE ---
+if 'lang' not in st.session_state:
+    st.session_state.lang = "CN"
+
+# Helper to map display name to code
+LANG_MAP = {
+    "中文 (Chinese)": "CN",
+    "English": "EN",
+    "日本語 (Japanese)": "JP",
+    "한국어 (Korean)": "KR",
+    "Français (French)": "FR",
+    "Español (Spanish)": "ES",
+    "ไทย (Thai)": "TH",
+    "Tiếng Việt (Vietnamese)": "VI"
+}
+
+# Reverse map for default index
+CODE_TO_NAME = {v: k for k, v in LANG_MAP.items()}
+
+LANG = st.session_state.lang
 
 # --- COOKIE MANAGER (Global) ---
 # Initialize here to persist across re-runs and page changes
@@ -87,26 +104,56 @@ def reset_app():
     st.rerun()
 
 def screen_splash():
-    # SIMPLIFIED SPLASH
-    st.markdown('<div style="text-align: center; margin-top: 10vh;">', unsafe_allow_html=True)
+    st.markdown('<div style="text-align: center; margin-top: 5vh;">', unsafe_allow_html=True)
     
+    # 1. LANGUAGE SELECTOR (First visual element)
+    # Get current index
+    current_name = CODE_TO_NAME.get(st.session_state.lang, "中文 (Chinese)")
+    lang_names = list(LANG_MAP.keys())
+    try:
+        idx = lang_names.index(current_name)
+    except:
+        idx = 0
+        
+    selected_lang_name = st.selectbox("Please Select Language / 请选择语言", lang_names, index=idx)
+    
+    # Update state if changed
+    new_lang_code = LANG_MAP[selected_lang_name]
+    if new_lang_code != st.session_state.lang:
+        st.session_state.lang = new_lang_code
+        st.rerun()
+
+    st.markdown("<br>", unsafe_allow_html=True)
+
+    # 2. LOGO & TITLE
     try:
         st.image("assets/logo.jpg", use_container_width=True)
     except:
-        st.write(get_text("splash_logo_missing", LANG))
+        st.write(get_text("splash_logo_missing", st.session_state.lang))
     
-    st.markdown(f'<h1 class="glitch-text" style="font-size: 3em; margin-top: 20px;">{get_text("splash_title", LANG)}</h1>', unsafe_allow_html=True)
-    st.caption(get_text("splash_subtitle", LANG))
+    st.markdown(f'<h1 class="glitch-text" style="font-size: 2.5em; margin-top: 20px;">{get_text("splash_title", st.session_state.lang)}</h1>', unsafe_allow_html=True)
+    st.caption(get_text("splash_subtitle", st.session_state.lang))
+    
+    # 3. SCROLLING MATRIX TEXT
+    scroll_text = get_text("splash_scroll_text", st.session_state.lang).replace("\n", "<br>")
+    st.markdown(f"""
+    <div class="splash-scroll-container">
+        <div class="splash-scroll-content">
+            {scroll_text}
+        </div>
+    </div>
+    """, unsafe_allow_html=True)
     
     st.markdown('</div>', unsafe_allow_html=True)
     
-    if st.button(get_text("splash_init_btn", LANG)):
-        with st.spinner(get_text("loading_modules", LANG)):
+    if st.button(get_text("splash_init_btn", st.session_state.lang)):
+        with st.spinner(get_text("loading_modules", st.session_state.lang)):
             time.sleep(1.5)
         go_to_calibration()
     
     st.markdown("<br>", unsafe_allow_html=True)
-    show_install_instructions(LANG)
+    # Removed install instructions as per previous request
+    show_install_instructions(st.session_state.lang)
 
 
 def screen_calibration():

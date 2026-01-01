@@ -274,6 +274,47 @@ h3 {
     }
 }
 
+/* SPLASH VERTICAL SCROLL (The Matrix Intro) */
+.splash-scroll-container {
+    width: 90%;
+    max-width: 600px;
+    height: 180px;
+    /* Visible height */
+    margin: 20px auto;
+    overflow: hidden;
+    position: relative;
+    border-top: 1px solid rgba(0, 240, 255, 0.3);
+    border-bottom: 1px solid rgba(0, 240, 255, 0.3);
+    background: rgba(0, 0, 0, 0.3);
+    mask-image: linear-gradient(to bottom, transparent, black 10%, black 90%, transparent);
+    -webkit-mask-image: linear-gradient(to bottom, transparent, black 10%, black 90%, transparent);
+}
+
+.splash-scroll-content {
+    position: absolute;
+    top: 100%;
+    width: 100%;
+    text-align: center;
+    color: #00FF00;
+    /* Matrix Green */
+    font-family: 'Share Tech Mono', monospace;
+    font-size: 0.9em;
+    line-height: 1.8;
+    text-shadow: 0 0 5px rgba(0, 255, 0, 0.5);
+    animation: vertical-scroll 25s linear infinite;
+}
+
+@keyframes vertical-scroll {
+    0% {
+        top: 100%;
+    }
+
+    100% {
+        top: -150%;
+        /* Scroll well past visual area */
+    }
+}
+
 /* MOBILE GRID */
 .metric-grid {
     display: grid;
